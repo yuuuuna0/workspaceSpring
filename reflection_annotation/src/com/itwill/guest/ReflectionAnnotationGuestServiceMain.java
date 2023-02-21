@@ -28,13 +28,13 @@ public class ReflectionAnnotationGuestServiceMain {
 		guestPackageClasses[1] = guestPackageClass1;
 		guestPackageClasses[2] = guestPackageClass2;
 
-		System.out.println("--------@MyComponent 객체생성--------------");
+		System.out.println("--------@Component 객체생성--------------");
 		for (Class clazz : guestPackageClasses) {
 			Annotation[] annotations = clazz.getAnnotations();
 			for (Annotation annotation : annotations) {
-				if (annotation instanceof MyComponent) {
+				if (annotation instanceof Component) {
 					System.out.println(clazz.getSimpleName() + ":" + annotation);
-					MyComponent myComponent = (MyComponent) annotation;
+					Component myComponent = (Component) annotation;
 					String componentName = myComponent.value();
 					Object newInstance = clazz.newInstance();
 					applicationContext.put(componentName, newInstance);
@@ -42,7 +42,7 @@ public class ReflectionAnnotationGuestServiceMain {
 			}
 		}
 
-		System.out.println("--------@MyAutoWire setter method호출--------------");
+		System.out.println("--------@AutoWire setter method호출--------------");
 		Iterator<String> beanIdIterator= applicationContext.keySet().iterator();
 		while (beanIdIterator.hasNext()) {
 			String beanId=beanIdIterator.next();
@@ -52,8 +52,8 @@ public class ReflectionAnnotationGuestServiceMain {
 			for (Method method : methods) {
 				Annotation[] annotations = method.getAnnotations();
 				for (Annotation annotation : annotations) {
-					if (annotation instanceof MyAutoWire) {
-						MyAutoWire myAutoWire = (MyAutoWire) annotation;
+					if (annotation instanceof AutoWire) {
+						AutoWire myAutoWire = (AutoWire) annotation;
 						System.out.println(myAutoWire);
 						System.out.println(beanClass.getSimpleName() + ":" + method);
 						String componentId = myAutoWire.value();

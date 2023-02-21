@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 
 @Retention(RUNTIME)
 @Target({ TYPE, FIELD, METHOD, CONSTRUCTOR })
-public @interface MyAutoWire {
+public @interface AutoWire {
 	String value() default "";
 }
