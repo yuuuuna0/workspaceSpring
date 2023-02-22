@@ -21,15 +21,15 @@ GUEST_HOMEPAGE          VARCHAR2(50)
 GUEST_TITLE    NOT NULL VARCHAR2(100)  
 GUEST_CONTENT  NOT NULL VARCHAR2(4000) 
 */
-
+@Repository
 public class GuestDaoImpl implements GuestDao {
-	
 	private DataSource dataSource;
 	
 	public GuestDaoImpl() {
 		System.out.println("2.#### GuestDaoImpl() 기본생성자호출");
 	}
 	
+	@Autowired
 	public GuestDaoImpl(DataSource dataSource) {
 		System.out.println("2.#### GuestDaoImpl(DataSource dataSource) 생성자호출:"+this);
 		this.dataSource = dataSource;
