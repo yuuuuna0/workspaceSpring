@@ -1,36 +1,45 @@
 package com.itwill.user;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+/*
+ *  사용자관리를 위하여 필요한 도메인클래스(VO,DTO)
+ *  USERINFO 테이블의 각컬럼에해당하는 멤버를 가지고있다
+ */
 
-@Component
-@Scope(scopeName="prototype")
 public class User {
+	/*
+	 * =================================== 
+	 * 이름 		널? 		유형
+	 * =================================== 
+	 * USERID 	NOT NULL VARCHAR2(100) 
+	 * PASSWORD	NOT NULL VARCHAR2(100) 
+	 * NAME 	NOT NULL VARCHAR2(200) 
+	 * EMAIL 			 VARCHAR2(300)
+	 * ===================================
+	 */
 	
 	private String userId;
 	private String password;
 	private String name;
 	private String email;
-
+	
 	public User() {
-		System.out.println("#### User : 디폴트생성자호출");
-		
+		System.out.println("1.#### User()기본생성자");
 	}
 
 	public User(String userId, String password, String name, String email) {
-		super();
+		System.out.println("1.#### User(String userId, String password, String name, String email) 생성자");
+		
 		this.userId = userId;
 		this.password = password;
 		this.name = name;
 		this.email = email;
-		System.out.println("#### User : User(String userId, String password, String name, String email) : 생성자호출");
-		
 	}
 	public String getUserId() {
 		return userId;
 	}
 
 	public void setUserId(String userId) {
+		System.out.println("2.#### User.setUserId(String userId) 메쏘드호출");
 		this.userId = userId;
 	}
 
@@ -39,6 +48,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
+		System.out.println("2.#### User.setPassword(String password) 메쏘드호출");
 		this.password = password;
 	}
 
@@ -47,22 +57,19 @@ public class User {
 	}
 
 	public void setName(String name) {
+		System.out.println("2.#### User.setName(String name) 메쏘드호출");
 		this.name = name;
 	}
 
 	public String getEmail() {
+		
 		return email;
 	}
 
 	public void setEmail(String email) {
+		System.out.println("2.#### User.setEmail(String email) 메쏘드호출");
 		this.email = email;
 	}
-	/*
-	@Override
-	public String toString() {
-		return "user:"+userId+","+password+","+name+","+email;
-	}
-	*/
 	/*
 	 *패쓰워드 일치여부 검사 
 	 */
@@ -73,7 +80,10 @@ public class User {
 		}
 		return isMatch;
 	}
-	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", password=" + password + ", name=" + name + ", email=" + email + "]";
+	}
 
 }
 

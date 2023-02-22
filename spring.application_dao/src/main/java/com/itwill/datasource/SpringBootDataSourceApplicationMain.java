@@ -1,6 +1,5 @@
 package com.itwill.datasource;
 
-
 import javax.sql.DataSource;
 
 import org.springframework.boot.SpringApplication;
@@ -14,8 +13,9 @@ public class SpringBootDataSourceApplicationMain {
 		ApplicationContext applicationContext=
 				SpringApplication.run(SpringBootDataSourceApplicationMain.class, args);
 		DataSource dataSource=applicationContext.getBean(DataSource.class);
-		System.out.println("1. Datasource : "+dataSource);
-		System.out.println("2. Connection : "+dataSource.getConnection());
+		System.out.println("1.DataSource:"+dataSource);
+		System.out.println("2.Connection:"+dataSource.getConnection());
+		
 	}
 
 }
