@@ -14,6 +14,8 @@ public class _03_ReflectionGetterSetterMethodInvocationMain {
 		System.out.println("1.############ 객체생성 ##############");
 		Class clazz = Class.forName(className);
 		Object instance = clazz.newInstance();
+		System.out.println();
+		
 		System.out.println("2.######### setter 메쏘드찾기 ########");
 		Method[] methods = clazz.getMethods();
 		for (Method method : methods) {
@@ -30,8 +32,12 @@ public class _03_ReflectionGetterSetterMethodInvocationMain {
 				}
 			}
 		}
+		System.out.println();
+		
 		System.out.println("4.######### 필드값확인 ########");
 		System.out.println(instance);
+		System.out.println();
+		
 		System.out.println("5.######### getter 메쏘드찾기 ########");
 		methods = clazz.getMethods();
 		for (Method method : methods) {
@@ -46,6 +52,7 @@ public class _03_ReflectionGetterSetterMethodInvocationMain {
 					System.out.println("6.######### getter 메쏘드호출 ########");
 					Object returnObject=method.invoke(instance, null);
 					String returnValue=(String)returnObject;
+					System.out.println();
 					System.out.println("7.######### 반환값확인 ########");
 					System.out.println(returnValue);
 				}

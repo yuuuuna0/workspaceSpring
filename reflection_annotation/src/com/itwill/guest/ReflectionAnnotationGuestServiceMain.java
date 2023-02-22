@@ -13,7 +13,7 @@ public class ReflectionAnnotationGuestServiceMain {
 	public static void main(String[] args) throws Exception {
 		/*
 		 * 1.com.itwill.guest package에있는 모든클래스의  @Annotation을 읽어서 
-		 *   Spring Container객체[ApplicationContext객체]생성
+		 *   Spring Container객체[applicationContext객체]생성
 		 */
 		System.out.println("############### Spring Container 초기화 start ############# ");
 		HashMap applicationContext = new HashMap();

@@ -21,6 +21,7 @@ public class _02_ReflectionCreateInstanceMethodInvocationMain {
 		*/
 		Object newInstance=clazz.newInstance();
 		System.out.println(newInstance);
+		System.out.println();
 		
 		System.out.println("############ 이름으로 setGuest_no 메쏘드 실행하기 ###########");
 		Class[]  parameterClassTypes= new Class[1];
@@ -29,6 +30,8 @@ public class _02_ReflectionCreateInstanceMethodInvocationMain {
 		Object[] argumentArray= new Object[1];
 		argumentArray[0] = new Integer(8888);			
 		Object returnObject = method.invoke(newInstance, argumentArray);
+		System.out.println();
+		
 		System.out.println("############ 이름으로 getGuest_no 메쏘드 실행하기 ###########");
 		parameterClassTypes = new Class[0];
 		method = clazz.getMethod("getGuest_no",parameterClassTypes);
@@ -36,6 +39,8 @@ public class _02_ReflectionCreateInstanceMethodInvocationMain {
 		returnObject = method.invoke(newInstance, argumentArray);
 		Integer returnIntegerValue = (Integer) returnObject;
 		System.out.println(returnIntegerValue.intValue());
+		System.out.println();
+		
 		System.out.println("############ 이름으로 setGuest_name 메쏘드 실행하기 ###########");
 		parameterClassTypes= new Class[1];
 		parameterClassTypes[0] = String.class;
@@ -43,6 +48,8 @@ public class _02_ReflectionCreateInstanceMethodInvocationMain {
 		argumentArray= new Object[1];
 		argumentArray[0] = "제임스딘";			
 		returnObject = method.invoke(newInstance, argumentArray);
+		System.out.println();
+		
 		System.out.println("############ 이름으로 getGuest_name 메쏘드 실행하기 ###########");
 		parameterClassTypes = new Class[0];
 		method = clazz.getMethod("getGuest_name",parameterClassTypes);
@@ -50,6 +57,8 @@ public class _02_ReflectionCreateInstanceMethodInvocationMain {
 		returnObject = method.invoke(newInstance, null);
 		String returnStringValue = (String)returnObject;
 		System.out.println(returnStringValue);
+		System.out.println();
+		
 		System.out.println("############ 필드값 바꾸기 ###########");
 		Field field = clazz.getDeclaredField("guest_name");
 		field.setAccessible(true);
