@@ -2,6 +2,9 @@ package com.itwill.guest;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class GuestServiceImpl implements GuestService {
 	
 	public GuestServiceImpl() {
