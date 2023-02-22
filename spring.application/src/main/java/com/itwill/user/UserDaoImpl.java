@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository("userDao2")
 public class UserDaoImpl implements UserDao {
 	
 

@@ -8,14 +8,18 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository(value = "guestDao")
+@Scope(scopeName = "singleton")
 public class GuestDaoImpl implements GuestDao {
 	
 	public GuestDaoImpl() {
-		System.out.println("2.#### GuestDaoImpl() 기본생성자호출");
+		System.out.println("2-1.#### GuestDaoImpl() 기본생성자호출");
 	}
+	
 	
 	@Override
 	public List<Guest> selectAll()
