@@ -20,6 +20,7 @@ class GuestDaoImplJdbcTemplateTest {
 		System.out.println(guestDao.selectAll());
 	}
 	@Disabled
+	
 	@Test
 	void testSelectByNo() {
 		fail("Not yet implemented");
