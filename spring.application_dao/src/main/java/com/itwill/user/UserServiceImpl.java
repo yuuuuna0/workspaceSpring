@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+@Service(value = "userService")
+@Scope("singleton")
 public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	
@@ -13,14 +16,14 @@ public class UserServiceImpl implements UserService {
 		System.out.println("#### UserServiceImpl() : 디폴트생성자호출");
 
 	}
-
+	@Autowired
 	public void setUserDao(UserDao userDao) {
 		System.out.println("#### UserServiceImpl.setUserDao(UserDao userDao) : 메소드호출");
 		this.userDao = userDao;
 	}
 
 	public int create(User user) throws Exception {
-		userDao.create(user);		//의존성을 줄인다고 이거 쓰는데 왜 메소드 안에 또 userDao 쓰는지?
+		userDao.create(user);		
 		System.out.println("#### UserServiceImpl : create() 호출");
 		return 0;
 	}

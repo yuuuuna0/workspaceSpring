@@ -1,4 +1,4 @@
-package com.itwill.guest;
+package com.itwill.guest.dao.jdbc;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.itwill.guest.dao.jdbc.Guest;
+import com.itwill.guest.dao.jdbc.GuestDao;
 //@SpringBootApplication
 @SpringBootTest
 class GuestDaoImplTest {
