@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service("userService")
 public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	
@@ -15,8 +14,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Autowired
-	@Qualifier(value = "userDao2")
 	public void setUserDao(UserDao userDao) {
 		System.out.println("#### UserServiceImpl.setUserDao(UserDao userDao) : 메소드호출");
 		this.userDao = userDao;

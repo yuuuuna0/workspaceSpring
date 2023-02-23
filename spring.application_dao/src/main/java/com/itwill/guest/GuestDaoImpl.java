@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Repository;
 /*
 이름             널?       유형             
@@ -21,6 +22,7 @@ GUEST_HOMEPAGE          VARCHAR2(50)
 GUEST_TITLE    NOT NULL VARCHAR2(100)  
 GUEST_CONTENT  NOT NULL VARCHAR2(4000) 
 */
+//@SpringBootApplication
 @Repository
 public class GuestDaoImpl implements GuestDao {
 	private DataSource dataSource;
