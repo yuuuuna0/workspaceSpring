@@ -1,5 +1,7 @@
 package com.itwill.guest.dao.jdbctemplate;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 @SpringBootApplication
 public class SpringBootJdbcTemplateMain {
@@ -33,6 +36,15 @@ public class SpringBootJdbcTemplateMain {
 		 * 		2. CamelCase와 SnailCase는 호환 가능 ex.guest_email <=> guestEmail
 		 */
 		BeanPropertyRowMapper<Guest> guestBeanPropertyRowMapper=new BeanPropertyRowMapper<Guest>(Guest.class);
+		
+		//customizing Mapper
+		RowMapper<Guest> guestMapper=new RowMapper<Guest>() {
+			@Override
+			public Guest mapRow(ResultSet rs, int rowNum) throws SQLException{
+				Guest guest=new Guest(rs.getInt("guest_no"),"","","","","","");
+				return guest;
+			}
+		};
 
 		//queryForObject[반환타입 DTO]
 		String selectDtoSql="select * from guest where guest_no=?";
