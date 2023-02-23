@@ -1,4 +1,4 @@
-package com.itwill.user;
+package com.itwill.user.dao.jdbctemplate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,29 +7,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-
-import com.itwill.user.dao.jdbc.User;
-import com.itwill.user.dao.jdbc.UserDao;
 //@SpringBootApplication
 @SpringBootTest
-class UserDaoImplTest {
-	@Autowired
-	ApplicationContext applicationContext;
-	
+class UserDaoImplJdbcTemplateTest {
 	@Autowired
 	UserDao userDao;
-	
 	@Test
-	void contextLoad(){
-		System.out.println(applicationContext);
-	}
-	@Disabled
-	@Test
-	void testCreate() throws Exception{
-		//assertNull(userDao.findUser("test0505"));
-		User user =new User("test0505","test","test","test@naver.com");
-		assertEquals(userDao.create(user),1);
+	void testCreate() {
+		User user=new User("jdbcTemplate","1111","제이디비씨템플릿","jdbcTemplate@naver.com");
+		try {
+			int rowCount=userDao.create(user);
+			assertEquals(rowCount, 1);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 	}
 	@Disabled
 	@Test
@@ -41,11 +32,10 @@ class UserDaoImplTest {
 	void testRemove() {
 		fail("Not yet implemented");
 	}
+	@Disabled
 	@Test
-	void testFindUser() throws Exception{
-		User user=userDao.findUser("test0505");
-		assertNotNull(user);
-		System.out.println(user);
+	void testFindUser() {
+		fail("Not yet implemented");
 	}
 	@Disabled
 	@Test
