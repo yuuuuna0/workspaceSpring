@@ -13,7 +13,7 @@ ADDR_ID          NUMBER(11)
 */
 public class Student
 {
-	private Integer studId;
+	private Integer studId;	//int를 Integer로 선언(객체로)하게 되면 null을 넣어줄 수 있다.
 	private String name;
 	private String email;
 	private Date dob;

@@ -23,12 +23,14 @@ public class SpringBootMyBatisFlowMain {
 		/*
 		 * 2. SqlSession사용(CRUD)
 		 */
-		
 		/*
-		 * com.mybatis3.dao.mapper.StudentBasicMapper를 namespace로 가지는 xml파일의 findStudentById이름의 sql문
+		 * com.mybatis3.dao.mapper.StudentBasicMapper를 namespace로 가지는 xml파일의 
+		 * findStudent이름의 sql문
 		 */
-		System.out.println("#### findStudent:");
-		System.out.println("#### studentList:");
+		Student student=sqlSession.selectOne("com.mybatis3.dao.mapper.StudentBasicMapper.findStudent",1);
+		System.out.println("#### findStudent:"+student);	
+		List<Student> studentList=sqlSession.selectList("com.mybatis3.dao.mapper.StudentBasicMapper.studentList");
+		System.out.println("#### studentList:"+studentList);
 		/*
 		 * 5. SqlSession close
 		 */
