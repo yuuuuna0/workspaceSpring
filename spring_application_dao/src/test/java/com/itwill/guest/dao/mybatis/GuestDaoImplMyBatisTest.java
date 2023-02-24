@@ -2,6 +2,7 @@ package com.itwill.guest.dao.mybatis;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,17 +19,20 @@ class GuestDaoImplMyBatisTest {
 		System.out.println(guestDao);
 	}
 	//@Transactional	//test시행 후 rollback함
-	@Test
+	//@Test
 	void testSelectAll() throws Exception{
 		System.out.println(guestDao.selectAll());
 	}
 
-	void testSelectByNo() {
-		fail("Not yet implemented");
+	//@Test
+	void testSelectByNo() throws Exception{
+		System.out.println(guestDao.selectByNo(6));
 	}
-
-	void testInsertGuest() {
-		fail("Not yet implemented");
+	@Transactional
+	@Test
+	void testInsertGuest() throws Exception{
+		Guest guest=new Guest(0,"김김김",null,"김김김@naver.com","김김김.com","김김김","Null나와");
+		System.out.println(guestDao.insertGuest(guest));
 	}
 
 	void testUpdateGuest() {

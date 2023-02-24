@@ -39,14 +39,12 @@ public class GuestDaoImplMyBatis implements GuestDao {
 
 	@Override
 	public Guest selectByNo(int no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("selectByNo", no);
 	}
 
 	@Override
 	public int insertGuest(Guest guest) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("insertGuest", guest);
 	}
 
 	@Override
