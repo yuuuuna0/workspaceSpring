@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.transaction.annotation.Transactional;
 //@SpringBootApplication
 @SpringBootTest
 class GuestDaoImplJdbcTemplateTest {
@@ -45,9 +46,11 @@ class GuestDaoImplJdbcTemplateTest {
 			assertEquals(rowCount, 1);
 			System.out.println(guestDao.selectByNo(313));
 	}
+	//@Disabled
 	@Test
 	void testDeleteGuest() throws Exception{
-		int rowCount=guestDao.deleteGuest(230);
+		int rowCount=guestDao.deleteGuest(121);
+		assertEquals(rowCount, 1);
 		System.out.println(rowCount);
 		//rowCount 영향받은 행의 수
 	}
