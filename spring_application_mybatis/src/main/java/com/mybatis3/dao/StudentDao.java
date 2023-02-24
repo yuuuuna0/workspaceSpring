@@ -28,9 +28,7 @@ public class StudentDao {
 	/**************************************************
 	 * SELECT
 	 **************************************************/
-	/*
-	 * A.select sql의결과타입이 DTO,VO,Domain객체인경우 resultType : DTO,VO,Domain
-	 */
+	//A.select sql의결과타입이 DTO,VO,Domain객체인경우 resultType : DTO,VO,Domain
 	public Student findStudentById(Integer studId) {
 		return sqlSession.selectOne("findStudentById",studId);
 	}
@@ -38,17 +36,14 @@ public class StudentDao {
 	public List<Student> findAllStudents() {
 		return sqlSession.selectList("findAllStudents");
 	}
-
-	/*
-	 * select sql의결과타입이 Wrapper,String 객체인경우 resultType : Wrapper,String
-	 */
+	//B.select sql의결과타입이 String,Wrapper객체인경우 resultType : java.lang.String, java.lang.Integer
 	public String findStudentNameById(Integer userId) {
-		return null;
+		return sqlSession.selectOne("findStudentNameById",userId);
 	}
-
 	public List<String> findStudentNameList() {
-		return null;
+		return sqlSession.selectList("findStudentNameList");
 	}
+	
 	/***********************************
 	 * INSERT
 	 ***********************************/
@@ -59,18 +54,18 @@ public class StudentDao {
 	public int insertStudentBySequence1(Student student) {
 		return sqlSession.insert("insertStudentBySequence1",student);
 	}
-	/*
-	 * sequence실행후 PK return
-	 */
+	//sequence실행후 PK return
 	public int insertStudentBySequence2(Student student) {
 		return sqlSession.insert("insertStudentBySequence2",student);
 	}
+	
 	/***********************************
 	 * UPDATE
 	 ***********************************/
 	public int updateStudentById(Student student) {
 		return sqlSession.update("updateStudentById",student);
 	}
+	
 	/***********************************
 	 * DELETE
 	 ***********************************/

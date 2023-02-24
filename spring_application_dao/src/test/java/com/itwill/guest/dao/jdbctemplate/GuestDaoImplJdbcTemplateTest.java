@@ -48,6 +48,7 @@ class GuestDaoImplJdbcTemplateTest {
 	@Test
 	void testDeleteGuest() throws Exception{
 		int rowCount=guestDao.deleteGuest(230);
+		System.out.println(rowCount);
 		//rowCount 영향받은 행의 수
 	}
 

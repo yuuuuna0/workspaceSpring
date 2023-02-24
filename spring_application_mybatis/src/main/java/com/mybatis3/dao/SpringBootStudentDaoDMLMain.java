@@ -35,7 +35,7 @@ public class SpringBootStudentDaoDMLMain {
 		updateStudent.setDob(new SimpleDateFormat("yyyy/MM/dd").parse("2000/02/02"));
 		System.out.println("#### update rowCount: "+studentDao.updateStudentById(updateStudent));
 		System.out.println("---------deleteStudentById---------------------------");
-		System.out.println("#### delete rowCount: "+studentDao.deleteStudentById(1111));
+		System.out.println("#### delete rowCount: "+studentDao.deleteStudentById(8));
 		System.out.println("---------deleteStudentByName-------------------------");
 		System.out.println("---------deleteStudentByNameLike---------------------");
 	}
