@@ -32,11 +32,11 @@ public class StudentDao {
 	 * A.select sql의결과타입이 DTO,VO,Domain객체인경우 resultType : DTO,VO,Domain
 	 */
 	public Student findStudentById(Integer studId) {
-		return null;
+		return sqlSession.selectOne("findStudentById",studId);
 	}
 
 	public List<Student> findAllStudents() {
-		return null;
+		return sqlSession.selectList("findAllStudents");
 	}
 
 	/*
@@ -49,6 +49,43 @@ public class StudentDao {
 	public List<String> findStudentNameList() {
 		return null;
 	}
+	/***********************************
+	 * INSERT
+	 ***********************************/
+	public int insertStudent(Student student) {
+		return sqlSession.insert("insertStudent", student);
+	}
+
+	public int insertStudentBySequence1(Student student) {
+		return sqlSession.insert("insertStudentBySequence1",student);
+	}
+	/*
+	 * sequence실행후 PK return
+	 */
+	public int insertStudentBySequence2(Student student) {
+		return sqlSession.insert("insertStudentBySequence2",student);
+	}
+	/***********************************
+	 * UPDATE
+	 ***********************************/
+	public int updateStudentById(Student student) {
+		return sqlSession.update("updateStudentById",student);
+	}
+	/***********************************
+	 * DELETE
+	 ***********************************/
+	public int deleteStudentById(Integer studId) {
+		return sqlSession.delete("deleteStudentById",studId);
+	}
+
+	public int deleteStudentByName(String name) {
+		return 0;
+	}
+
+	public int deleteStudentByNameLike(String name) {
+		return 0;
+	}
+
 
 	/*
 	 * B.select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : DTO,VO,Domain
@@ -82,46 +119,11 @@ public class StudentDao {
 		return null;
 	}
 
-	/***********************************
-	 * DELETE
-	 ***********************************/
-	public int deleteStudentById(Integer studId) {
-		return 0;
-	}
 
-	public int deleteStudentByName(String name) {
-		return 0;
-	}
 
-	public int deleteStudentByNameLike(String name) {
-		return 0;
-	}
+	
 
-	/***********************************
-	 * UPDATE
-	 ***********************************/
-	public int updateStudentById(Student student) {
-		return 0;
-
-	}
-
-	/***********************************
-	 * INSERT
-	 ***********************************/
-	public int insertStudent(Student student) {
-		return 0;
-	}
-
-	public int insertStudentBySequence1(Student student) {
-		return 0;
-	}
-
-	/*
-	 * sequence실행후 PK return
-	 */
-	public int insertStudentBySequence2(Student student) {
-		return 0;
-	}
+	
 
 	/**************************************************
 	 * SELECT[students + address + courses[course_enrollment] JOIN( 1 : 1 : N )
