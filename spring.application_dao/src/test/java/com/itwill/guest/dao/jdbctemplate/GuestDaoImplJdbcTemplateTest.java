@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DuplicateKeyException;
 //@SpringBootApplication
 @SpringBootTest
 class GuestDaoImplJdbcTemplateTest {
 	@Autowired
 	GuestDao guestDao;
-	
+	@Disabled
 	@Test
 	void testSelectAll() throws Exception{
 		assertNotNull(guestDao.selectAll());
@@ -20,25 +21,34 @@ class GuestDaoImplJdbcTemplateTest {
 		System.out.println(guestDao.selectAll());
 	}
 	@Disabled
-	
 	@Test
-	void testSelectByNo() {
-		fail("Not yet implemented");
+	void testSelectByNo() throws Exception{
+		assertNotNull(guestDao.selectByNo(309));
+		System.out.println(guestDao.selectByNo(309));
 	}
 	@Disabled
 	@Test
 	void testInsertGuest() {
-		fail("Not yet implemented");
+		try {
+			Guest guest=new Guest(0,"집",null,"home@naver.com","WannaGoHome.com","집가고싶어용","1시간30분!!");
+			int rowCount=guestDao.insertGuest(guest);
+			assertEquals(rowCount, 1);
+		} catch (Exception e) {
+			assertInstanceOf(DuplicateKeyException.class, e);	//동일한 키에서 에러가 발생
+		}
 	}
 	@Disabled
 	@Test
-	void testUpdateGuest() {
-		fail("Not yet implemented");
+	void testUpdateGuest() throws Exception{
+			Guest updateGuest=new Guest(313,"변경",null,"변경@naver.com","변경.com","변경","변경되었을까?");
+			int rowCount=guestDao.updateGuest(updateGuest);
+			assertEquals(rowCount, 1);
+			System.out.println(guestDao.selectByNo(313));
 	}
-	@Disabled
 	@Test
-	void testDeleteGuest() {
-		fail("Not yet implemented");
+	void testDeleteGuest() throws Exception{
+		int rowCount=guestDao.deleteGuest(230);
+		//rowCount 영향받은 행의 수
 	}
 
 }

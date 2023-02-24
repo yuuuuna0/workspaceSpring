@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DuplicateKeyException;
 //@SpringBootApplication
 @SpringBootTest
 class UserDaoImplJdbcTemplateTest {
@@ -14,12 +15,13 @@ class UserDaoImplJdbcTemplateTest {
 	UserDao userDao;
 	@Test
 	void testCreate() {
-		User user=new User("jdbcTemplate","1111","제이디비씨템플릿","jdbcTemplate@naver.com");
+		User user=new User("jdbcTemplate123","1111","제이디비씨템플릿","jdbcTemplate@naver.com");
 		try {
 			int rowCount=userDao.create(user);
 			assertEquals(rowCount, 1);
 		} catch (Exception e) {
-			fail(e.getMessage());
+			//fail(e.getMessage());
+			assertInstanceOf(DuplicateKeyException.class, e);
 		}
 	}
 	@Disabled

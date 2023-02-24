@@ -69,7 +69,7 @@ public class SpringBootJdbcTemplateMain {
 		 ***********************************************************************/
 		//query[반환타입 List<Guest>]
 		String selectDtoListSql="select * from guest";
-		List<Guest> guestList=jdbcTemplate.query(selectDtoListSql, guestBeanPropertyRowMapper);
+		List<Guest> guestList=jdbcTemplate.query(selectDtoListSql, guestMapper);
 		System.out.println("#### "+guestList.size());
 		System.out.println("#### query[List<Guest>]"+guestList);
 		
@@ -103,6 +103,30 @@ public class SpringBootJdbcTemplateMain {
 		String deleteSql="delete from guest where guest_no=?";
 		rowCount=jdbcTemplate.update(deleteSql,310);
 		System.out.println("#### delete row count: "+rowCount);
+		
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 }
