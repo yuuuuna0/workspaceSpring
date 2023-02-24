@@ -25,7 +25,7 @@ public class SpringBootMyBatisFlowMain {
 		 */
 		
 		/*
-		 * com.mybatis3.dao.mapper.StudentBasicMapper를 namespace로가지는 xml파일의 findStudentById이름의 sql문
+		 * com.mybatis3.dao.mapper.StudentBasicMapper를 namespace로 가지는 xml파일의 findStudentById이름의 sql문
 		 */
 		System.out.println("#### findStudent:");
 		System.out.println("#### studentList:");
