@@ -20,9 +20,9 @@ GUEST_CONTENT  NOT NULL VARCHAR2(4000)
 @Data
 public class Guest {
 	private int guest_no;
-	private String name;
-	private String guestDate;
-	private String guestEmail;
+	private String guest_name;
+	private String guest_date;
+	private String guest_email;
 	private String guest_homepage;
 	private String guest_title;
 	private String guest_content;

@@ -34,8 +34,7 @@ public class GuestDaoImplMyBatis implements GuestDao {
 
 	@Override
 	public List<Guest> selectAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("selectAll");
 	}
 
 	@Override

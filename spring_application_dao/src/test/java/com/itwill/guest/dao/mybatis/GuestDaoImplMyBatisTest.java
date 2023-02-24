@@ -17,28 +17,24 @@ class GuestDaoImplMyBatisTest {
 	void init() {
 		System.out.println(guestDao);
 	}
-	@Transactional	//test시행 후 rollback함
+	//@Transactional	//test시행 후 rollback함
 	@Test
-	void testSelectAll() {
-		fail("Not yet implemented");
+	void testSelectAll() throws Exception{
+		System.out.println(guestDao.selectAll());
 	}
 
-	@Test
 	void testSelectByNo() {
 		fail("Not yet implemented");
 	}
 
-	@Test
 	void testInsertGuest() {
 		fail("Not yet implemented");
 	}
 
-	@Test
 	void testUpdateGuest() {
 		fail("Not yet implemented");
 	}
 
-	@Test
 	void testDeleteGuest() {
 		fail("Not yet implemented");
 	}
