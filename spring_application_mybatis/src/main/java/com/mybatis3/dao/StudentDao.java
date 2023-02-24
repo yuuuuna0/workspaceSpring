@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,12 +16,61 @@ import org.springframework.stereotype.Repository;
 
 import com.mybatis3.domain.Student;
 
-
+@Repository
 public class StudentDao {
-	
+	//1단계: private DataSource dataSource;
+	//2단계: private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private SqlSession sqlSession;
 	
 	public StudentDao() {
 	}
+	/**************************************************
+	 * SELECT
+	 **************************************************/
+	/*
+	 * A.select sql의결과타입이 DTO,VO,Domain객체인경우 resultType : DTO,VO,Domain
+	 */
+	public Student findStudentById(Integer studId) {
+		return null;
+	}
+
+	public List<Student> findAllStudents() {
+		return null;
+	}
+
+	/*
+	 * select sql의결과타입이 Wrapper,String 객체인경우 resultType : Wrapper,String
+	 */
+	public String findStudentNameById(Integer userId) {
+		return null;
+	}
+
+	public List<String> findStudentNameList() {
+		return null;
+	}
+
+	/*
+	 * B.select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : DTO,VO,Domain
+	 */
+	public Student findStudentByIdResultMap(Integer studId) {
+		return null;
+	}
+
+	public List<Student> findAllStudentsResultMap() {
+		return null;
+	}
+
+	public List<Student> findStudentByIdRangeParamMap(HashMap idRangeMap) {
+		return null;
+	}
+	public List<Student> findStudentsThreeParamMap(HashMap studentsMap) {
+		return null;
+	}
+	public int updateStudentParamMap(Map studentMap) {
+		return 0;
+	}
+	
 	/**************************************************
 	 * 결과데이타를 Map(HashMap)에 담아서 반환할수있다
 	 ***************************************************/
@@ -102,50 +153,6 @@ public class StudentDao {
 		return null;
 	}
 
-	/**************************************************
-	 * SELECT
-	 **************************************************/
-	/*
-	 * A.select sql의결과타입이 DTO,VO,Domain객체인경우 resultType : DTO,VO,Domain
-	 */
-	public Student findStudentById(Integer studId) {
-		return null;
-	}
-
-	public List<Student> findAllStudents() {
-		return null;
-	}
-
-	/*
-	 * select sql의결과타입이 Wrapper,String 객체인경우 resultType : Wrapper,String
-	 */
-	public String findStudentNameById(Integer userId) {
-		return null;
-	}
-
-	public List<String> findStudentNameList() {
-		return null;
-	}
-
-	/*
-	 * B.select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : DTO,VO,Domain
-	 */
-	public Student findStudentByIdResultMap(Integer studId) {
-		return null;
-	}
-
-	public List<Student> findAllStudentsResultMap() {
-		return null;
-	}
-
-	public List<Student> findStudentByIdRangeParamMap(HashMap idRangeMap) {
-		return null;
-	}
-	public List<Student> findStudentsThreeParamMap(HashMap studentsMap) {
-		return null;
-	}
-	public int updateStudentParamMap(Map studentMap) {
-		return 0;
-	}
+	
 
 }

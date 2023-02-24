@@ -31,9 +31,5 @@ public class SpringBootMyBatisFlowMain {
 		System.out.println("#### findStudent:"+student);	
 		List<Student> studentList=sqlSession.selectList("com.mybatis3.dao.mapper.StudentBasicMapper.studentList");
 		System.out.println("#### studentList:"+studentList);
-		/*
-		 * 5. SqlSession close
-		 */
-	
 	}
 }
