@@ -1,16 +1,10 @@
 package com.mybatis3.dao;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -143,7 +137,7 @@ public class StudentDao {
 	 * select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : studentWithAddressResultMap
 	 */
 	public Student findStudentByIdWithAddress(Integer studId) {
-		return null;
+		return studentMapper.findStudentByIdWithAddress(studId);
 	}
 
 	
