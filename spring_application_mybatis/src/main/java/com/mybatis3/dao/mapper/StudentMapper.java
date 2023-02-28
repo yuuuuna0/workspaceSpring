@@ -4,9 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 
 import com.mybatis3.domain.Student;
+import com.mybatis3.domain.Tutor;
 @Mapper
 public interface StudentMapper {
 	/*
@@ -37,6 +42,32 @@ public interface StudentMapper {
 	public int updateStudentById(Student student);
 	public int deleteStudentById(Integer studId);
 	public Student findStudentByIdWithAddress(Integer studId);
+	/*
+	 *  <resultMap id="studentWithCoursesResultMap" type="com.mybatis3.domain.Student" autoMapping="true">
+	 	<result column="STUDENT_NAME" property="name"/>
+	 	<collection property="courseList" javaType="java.util.List" ofType="com.mybatis3.domain.Course">
+	 		<result column="COURSE_NAME" property="name"/>
+	 	</collection>
+	 </resultMap>
+	  <select id="findStudentByIdWithCourses" parameterType="java.lang.Integer" resultMap="studentWithCoursesResultMap">
+		  	select stud_id,s.name as student_name,email,dob,course_id,c.name as course_name,description,start_date,end_date 
+			from students s 
+			join course_enrollment ce
+			on s.stud_id = ce.stud_id
+			join courses c
+			on ce.course_id=c.course_id where s.stud_id=#{studId}
+	  </select>
+	 */
+	@ResultMap("studentWithCoursesResultMap")
+	@Select("select s.stud_id,s.name as student_name,email,dob,"
+			+ "			c.course_id,c.name as course_name,description,start_date,end_date"
+			+ "			from students s"
+			+ "			join course_enrollment ce"
+			+ "			on s.stud_id = ce.stud_id"
+			+ "			join courses c"
+			+ "			on ce.course_id=c.course_id where s.stud_id=#{studId}")
+	public Student findStudentByIdWithCourses(@Param("studId") Integer studId);
+	
 	
 	
 }

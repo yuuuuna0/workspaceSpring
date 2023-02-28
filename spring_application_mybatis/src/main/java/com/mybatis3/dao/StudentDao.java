@@ -127,7 +127,7 @@ public class StudentDao {
 	 * select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : studentWithCoursesResultMap
 	 */
 	public Student findStudentByIdWithCourses(Integer studId) {
-		return null;
+		return studentMapper.findStudentByIdWithCourses(studId);
 	}
 
 	/**************************************************
@@ -137,7 +137,7 @@ public class StudentDao {
 	 * select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : studentWithAddressResultMap
 	 */
 	public Student findStudentByIdWithAddress(Integer studId) {
-		return studentMapper.findStudentByIdWithAddress(studId);
+		return null;
 	}
 
 	

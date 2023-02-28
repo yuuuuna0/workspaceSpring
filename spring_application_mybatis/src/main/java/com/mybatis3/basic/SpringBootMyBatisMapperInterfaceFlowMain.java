@@ -1,6 +1,7 @@
 package com.mybatis3.basic;
 
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,7 +37,6 @@ public class SpringBootMyBatisMapperInterfaceFlowMain {
 		System.out.println("#### findStudent:" +studentBasicMapper.findStudent(3));
 	
 		System.out.println("#### studentList:"+studentBasicMapper.studentList());
-	
 	
 	}
 }

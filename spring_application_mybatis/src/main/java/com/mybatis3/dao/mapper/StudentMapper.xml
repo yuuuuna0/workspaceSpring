@@ -86,7 +86,7 @@
 	 * SELECT	[students+address JOIN](1:1)
 	 **************************************************/
 	 //A.select sql의결과타입이 DTO,VO,Domain객체인경우 
-	 	 resultMap : DTO,VO,Domain
+	 	 resultMap : studentWithAddress
 	 -->
 	  <select id="findStudentByIdWithAddress" 
 	  		  parameterType="java.lang.Integer" 
@@ -96,7 +96,29 @@
 			left outer join addresses a 
 			on s.addr_id=a.addr_id where stud_id=#{studId}
 	  </select>
-	  
+	 <!--  
+	/**************************************************
+	 * SELECT	[students+course_enrollment JOIN](1:1)
+	 **************************************************/
+	 //A.select sql의결과타입이 DTO,VO,Domain객체인경우 
+	 	 resultMap : findStudentByIdWithCourses
+	 -->
+	 <resultMap id="studentWithCoursesResultMap" type="com.mybatis3.domain.Student" autoMapping="true">
+	 	<result column="STUDENT_NAME" property="name"/>
+	 	<collection property="courseList" javaType="java.util.List" ofType="com.mybatis3.domain.Course" autoMapping="true">
+	 		<result column="COURSE_NAME" property="name"/>
+	 	</collection>
+	 </resultMap>
+	 <!-- 
+	  <select id="findStudentByIdWithCourses" parameterType="java.lang.Integer" resultMap="studentWithCoursesResultMap">
+		  	select stud_id,s.name as student_name,email,dob,course_id,c.name as course_name,description,start_date,end_date 
+			from students s 
+			join course_enrollment ce
+			on s.stud_id = ce.stud_id
+			join courses c
+			on ce.course_id=c.course_id where s.stud_id=#{studId}
+	  </select>
+	   -->
 	  
 	  
 	  

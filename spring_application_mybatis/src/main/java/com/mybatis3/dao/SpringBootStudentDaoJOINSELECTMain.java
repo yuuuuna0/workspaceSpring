@@ -16,6 +16,7 @@ public class SpringBootStudentDaoJOINSELECTMain {
 		System.out.println(studentDao.findStudentByIdWithAddress(1));
 		System.out.println(studentDao.findStudentById(7));
 		System.out.println("---------findStudentByIdWithCourses------------------");
+		System.out.println(studentDao.findStudentByIdWithCourses(2));
 		System.out.println("---------findStudentByIdWithAddressWithCourses-------");
 		
 		
