@@ -26,7 +26,7 @@ public class Controller파라메타타입 {
           , HttpSession session
           , WebRequest webRequest                  
           ,NaviteWebRequest nwRequest                  
-          , Locale locale                  
+          , Locale locale    	//국제화 작업 가능하게 함              
           , InputStream is                  
           , Reader reader                  
           , OutputStream os                  
