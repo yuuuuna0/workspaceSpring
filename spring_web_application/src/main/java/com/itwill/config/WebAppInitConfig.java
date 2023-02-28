@@ -12,7 +12,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  * web.xml설정을 대신 할 클래스
  * 		-tomcat실행 시 기본 설정
  */
-public class WebAppInitConf implements WebApplicationInitializer{
+public class WebAppInitConfig implements WebApplicationInitializer{
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
