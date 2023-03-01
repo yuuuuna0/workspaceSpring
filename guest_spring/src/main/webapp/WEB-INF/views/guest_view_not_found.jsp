@@ -4,5 +4,5 @@
 	pageEncoding="UTF-8"%>
 <script>
 	alert('${GUEST_NOT_FOUND_MSG}');
-	location.href = 'guest_list.do';
+	location.href = 'guest_list';
 </script>
