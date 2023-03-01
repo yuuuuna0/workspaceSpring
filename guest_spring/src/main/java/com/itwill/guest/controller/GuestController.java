@@ -22,6 +22,11 @@ public class GuestController {
 	public GuestController() {
 		System.out.println(">>>GuestController");
 	}
+	@RequestMapping("/")
+	public String guest() {	
+		String forwardPath = "forward:/WEB-INF/views/guest_main.jsp";
+		return forwardPath;
+	}
 	@RequestMapping("/guest_main")
 	public String guest_main() {	
 		String forwardPath = "forward:/WEB-INF/views/guest_main.jsp";
