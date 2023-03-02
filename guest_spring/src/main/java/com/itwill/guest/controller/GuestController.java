@@ -68,7 +68,7 @@ public class GuestController {
 	public String guest_view(@RequestParam Integer guest_no, Model model ) throws Exception{
 		Guest guest=guestService.selectByNo(guest_no);
 		model.addAttribute("guest",guest);
-		String forwardPath = "forward:/WEB-INF/views/guest_view.jsp";
+		String forwardPath = "redirect:guest_view?guest_no="+guest_no;
 		return forwardPath;
 	}
 	@PostMapping("/guest_write_action")

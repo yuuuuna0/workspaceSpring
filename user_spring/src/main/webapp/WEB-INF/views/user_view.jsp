@@ -61,7 +61,7 @@
 								</tr>
 							</table> <!-- view Form  -->
 							<form name="f" method="post">
-								<input type="hidden" name="userId" value="guard" />
+								<input type="hidden" name="userId" value="${loginUser.userId}" />
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
