@@ -44,22 +44,11 @@ public class GuestController {
 		String forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
 		return forwardPath;
 	}
-	@GetMapping("guest_modify_action_get")
-	public String guest_modify_action_get() {
-		String forwardPath = "redirect:guest_main";
-		return forwardPath;
-	}
 	@PostMapping("/guest_modify_action")
 	public String guest_modify_action(@ModelAttribute Guest guest,Model model) throws Exception{
 		int result=guestService.updateGuest(guest);
 		model.addAttribute("guest", guest);
 		String forwardPath = "redirect:guest_view?guest_no="+guest.guest_no;
-		return forwardPath;
-	}
-	@GetMapping("/guest_modify_form_get")
-	public String guest_modify_form_get() {
-		//###############안됨,,,,################
-		String forwardPath = "redirect:guest_main";
 		return forwardPath;
 	}
 	@PostMapping("/guest_modify_form")
@@ -69,12 +58,6 @@ public class GuestController {
 		String forwardPath = "forward:/WEB-INF/views/guest_modify_form.jsp";
 		return forwardPath;
 	}
-	@GetMapping("/guest_remove_action_get")
-	public String guest_remove_action_get() {
-		String forwardPath = "redirect:guest_remove_action";
-		return forwardPath;
-	}
-
 	@PostMapping("/guest_remove_action")
 	public String guest_remove_action(@RequestParam Integer guest_no) throws Exception{
 		int result=guestService.deleteGuest(guest_no);
@@ -88,11 +71,6 @@ public class GuestController {
 		String forwardPath = "forward:/WEB-INF/views/guest_view.jsp";
 		return forwardPath;
 	}
-	@GetMapping("/guest_write_action_get")
-	public String guest_write_action_get() {
-		String forwardPath = "redirect:guest_main";
-		return forwardPath;
-	}
 	@PostMapping("/guest_write_action")
 	public String guest_write_action(@ModelAttribute Guest guest) throws Exception{
 		int result=guestService.insertGuest(guest);
@@ -103,7 +81,36 @@ public class GuestController {
 	public String guest_write_form() {
 		String forwardPath = "forward:/WEB-INF/views/guest_write_form.jsp";
 		return forwardPath;
-
 	}
+	
+	@GetMapping(value= {"/guest_write_action_get","/guest_remove_action_get","/guest_modify_form_get","/guest_modify_action_get"})
+	public String guest_get() {
+		String forwardPath="redirect:guest_main";
+		return forwardPath;
+	}
+/*
+	@GetMapping("/guest_write_action_get")
+	public String guest_write_action_get() {
+		String forwardPath = "redirect:guest_main";
+		return forwardPath;
+	} 
+ 	@GetMapping("/guest_remove_action_get")
+	public String guest_remove_action_get() {
+		String forwardPath = "redirect:guest_remove_action";
+		return forwardPath;
+	}
+ 	@GetMapping("/guest_modify_form_get")
+	public String guest_modify_form_get() {
+		//###############안됨,,,,################
+		String forwardPath = "redirect:guest_main";
+		return forwardPath;
+	}
+ 	@GetMapping("guest_modify_action_get")
+	public String guest_modify_action_get() {
+		String forwardPath = "redirect:guest_main";
+		return forwardPath;
+	}
+ 
+ */
 
 }
