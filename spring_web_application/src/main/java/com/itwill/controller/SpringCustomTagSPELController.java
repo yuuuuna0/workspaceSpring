@@ -2,6 +2,9 @@ package com.itwill.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,15 +42,19 @@ public class SpringCustomTagSPELController {
 		return "spring_customtag_spel";
 	}
 	/************Spring JSP에서 국제화*******************
-	1. application-config.xml에 MessageSource빈설정
-	 <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-  		<property name="basenames" value="messages/messages,messages/user"/>
-  	 </bean>
+	1. ApplicationConfig.jaca에 MessageSource 빈 설정 
+		 @Bean("messageSource")
+		public MessageSource messageSource() {
+			ResourceBundleMessageSource resourceBundleMessageSource=new ResourceBundleMessageSource(); 
+			resourceBundleMessageSource.setBasenames("messages/messages","messages/user");
+			return resourceBundleMessageSource;
+		}
+
   	 *****************************************************/
 	
-	
+	@RequestMapping("/spring_customtag_spel_i18n")
 	public String spring_customtag_spel_i18n() {
-		return "";
+		return "spring_customtag_spel_i18n";
 	}
 	
 	
