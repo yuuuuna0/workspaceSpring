@@ -46,7 +46,7 @@ public class GuestController {
 	}
 	@GetMapping("guest_modify_action_get")
 	public String guest_modify_action_get() {
-		String forwardPath = "redirect:guest_modify_action";
+		String forwardPath = "redirect:guest_main";
 		return forwardPath;
 	}
 	@PostMapping("/guest_modify_action")
@@ -56,10 +56,10 @@ public class GuestController {
 		String forwardPath = "redirect:guest_view?guest_no="+guest.guest_no;
 		return forwardPath;
 	}
-	@GetMapping("/guest_modify_get")
-	public String guest_modify_get() {
+	@GetMapping("/guest_modify_form_get")
+	public String guest_modify_form_get() {
 		//###############안됨,,,,################
-		String forwardPath = "redirect:guest_modify_form";
+		String forwardPath = "redirect:guest_main";
 		return forwardPath;
 	}
 	@PostMapping("/guest_modify_form")
@@ -88,9 +88,9 @@ public class GuestController {
 		String forwardPath = "forward:/WEB-INF/views/guest_view.jsp";
 		return forwardPath;
 	}
-	@GetMapping("/guest_write_action")
+	@GetMapping("/guest_write_action_get")
 	public String guest_write_action_get() {
-		String forwardPath = "forward:/WEB-INF/views/guest_write_form.jsp";
+		String forwardPath = "redirect:guest_main";
 		return forwardPath;
 	}
 	@PostMapping("/guest_write_action")

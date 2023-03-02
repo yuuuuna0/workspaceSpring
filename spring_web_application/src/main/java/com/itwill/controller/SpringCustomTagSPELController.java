@@ -16,7 +16,7 @@ public class SpringCustomTagSPELController {
 		return "jstl_fmt_i18n";
 		
 	}
-	
+	@GetMapping("/spring_customtag_spel")
 	public String spring_customtag_spel(HttpServletRequest request) {
 		
 		request.setAttribute("price0", 234234);
