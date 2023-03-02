@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="s"  uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%--
 	request.setAttribute("price0", 345345435);
 	request.setAttribute("name0", "kim eun hi");
@@ -32,38 +32,35 @@
 	   --> Spring CustomTag(eval) 의 속성(expression)안에서 사용가능한 표현언어(식)
 </p>
 <ul>
-	<li>문자열리터럴(EL):&dollar;{'KIM'.replace('K','N')}</li>
+	<li>문자열리터럴(EL):&dollar;{'KIM'.replace('K','L')}</li>
 	<li>문자열리터럴(SPEL):<s:eval expression="'KIM'.replace('K','N')"/></li>
-	<li>숫자리터럴(EL):${13123+343244}</li>
-	<li>숫자리터럴(SPEL):<s:eval expression="13123+343244"/></li>
-	<li>논리리터럴(EL):${true}</li>
+	<li>숫자리터럴(EL):${123456+2356752}</li>
+	<li>숫자리터럴(SPEL):<s:eval expression="123456+2356752"/></li>
+	<li>논리리터럴(EL):${true }</li>
 	<li>논리리터럴(SPEL):<s:eval expression="true"/></li>
-	<li>변수1(EL String Wrraper):${price0},${name0},
-								 ${price1},${name1},
-								 ${married1}</li>
+	<li>변수1(EL String Wrraper):${price0},${name0},${name1},${married1}</li>
 	<li>변수2(EL Bean):${guest.guest_name},${guest.guest_email}</li>
 	<li>
 		변수1(SPEL String Wrapper):
-		<s:eval expression="price2"/>,
-		<s:eval expression="name2"/>,
-		<s:eval expression="married2"/>
+			<s:eval expression="price2"/>,
+			<s:eval expression="name2"/>,
+			<s:eval expression="married2"/>
 	</li>
 	<li>
 		변수2(SPEL Bean):
-		<s:eval expression="guest.guest_name"/>,
-		<s:eval expression="guest.getGuest_email().toUpperCase()"/>
-		<s:eval expression="guest.toString()"/>
+			<s:eval expression="guest.guest_name"/>,
+			<s:eval expression="guest.getGuest_email()"/>,
+			<s:eval expression="guest.guest_email.toUpperCase()"/>
 	</li>
 	<li>SPEL + EL(문자열리터럴):
-		<s:eval expression="'${name0}'.substring(1)"/> == 
 		<s:eval expression="name0.substring(1)"/>
+		<s:eval expression="'${name0}'.substring(1)"/>
 	</li>
 	<li>SPEL + EL(숫자리터럴):
-		<s:eval expression="${price0}+3455"/> ==
-		<s:eval expression="price0+3455"/>
+		<s:eval expression="${price0}+3456"/> == <s:eval expression="price0+3456"/>
 	</li>
 	<li>SPEL(SCOPE객체에 등록된 숫자변수(속성이름)):
-		<s:eval expression="price0+price1/9*0.32342"/>
+		<s:eval expression="price0+price1/9*3.141592"/>
 	</li>
 	<li>SPEL(SCOPE객체에 등록된 문자열변수(속성이름)):
 		<s:eval expression="name0.replace('kim','sim').substring(4)"/>
@@ -80,15 +77,12 @@
 	</li>
 	<li>
 		클래스생성자호출(SPEL에서는 호출가능):<br>
-		<s:eval 
-			expression="new java.text.DecimalFormat('#,###.0').format(price1)"/>
-		<br>
-		
+		<s:eval expression="new java.text.DecimalFormat('###,###.0').format(price1)"/>
 	</li>
 	<li>
 		@를 이용해서 SpringContainer에 등록된 빈사용가능
 		- @elBean:<s:eval expression="@elBean.toString()"/><br/>
-		- @elBean.member1:<s:eval expression="@elBean.member1"/><br/>
+		- @elBean.member1:<s:eval expression="@elBean.getMember1()"></s:eval><br/>
 		- @elBean.printMembers():<s:eval expression="@elBean.printMembers()"/><br/>
 	</li>
 </ul>
