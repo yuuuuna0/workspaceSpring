@@ -42,7 +42,7 @@
 	<li>변수2(EL Bean):${guest.guest_name},${guest.guest_email}</li>
 	<li>
 		변수1(SPEL String Wrapper):
-			<s:eval expression="price2"/>,
+			<s:eval expression="price0"/>,
 			<s:eval expression="name2"/>,
 			<s:eval expression="married2"/>
 	</li>
@@ -60,7 +60,10 @@
 		<s:eval expression="${price0}+3456"/> == <s:eval expression="price0+3456"/>
 	</li>
 	<li>SPEL(SCOPE객체에 등록된 숫자변수(속성이름)):
-		<s:eval expression="price0+price1/9*3.141592"/>
+		<s:eval expression="price0+price1/9*3.141592"/><br>
+		<s:eval expression="price0+price1/9"/> ---spel 인티저값으로 도출됨---<br> 
+		${price0+price1/9} --el 더블값으로 연산됨 --<br>
+		####### spel은 자동으로 캐스팅되지 않는다(자바처럼 계산함) #######
 	</li>
 	<li>SPEL(SCOPE객체에 등록된 문자열변수(속성이름)):
 		<s:eval expression="name0.replace('kim','sim').substring(4)"/>
