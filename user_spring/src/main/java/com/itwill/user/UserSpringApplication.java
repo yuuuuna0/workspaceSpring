@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan
+@MapperScan(basePackages = "com.itwill.user.mapper")
 public class UserSpringApplication {
 
 	public static void main(String[] args) {

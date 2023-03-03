@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwill.user.User;
 import com.itwill.user.UserService;
+import com.itwill.user.exception.ExistedUserException;
+import com.itwill.user.exception.PasswordMisMatchException;
+import com.itwill.user.exception.UserNotFoundException;
 /*
  * /user_main 
  * /user_write_form 
@@ -41,15 +44,17 @@ public class UserController {
 		return forwardPath;
 	}
 	@PostMapping("/user_write_action")
-	public String user_write_action_post(@ModelAttribute User user) throws Exception {
-		String forwardPath="";
-		int result=userService.create(user);
-		if(result==1) {
-			forwardPath = "redirect:/user_login_form";
-		}else if(result==-1) {
-			forwardPath="redirect:/user_write_form";
+	public String user_write_action(@ModelAttribute("fuser") User user,Model model) throws Exception {
+		String forward_path = "";
+		try {
+			int rowCount = userService.create(user);
+			forward_path="redirect:user_login_form";
+		}catch (ExistedUserException e) {
+			model.addAttribute("msg", e.getMessage());
+			//model.addAttribute("fuser", user);
+			forward_path="user_write_form";
 		}
-		return forwardPath;
+		return forward_path;
 	}
 	@RequestMapping("/user_login_form")
 	public String user_login_form() {
@@ -57,21 +62,25 @@ public class UserController {
 		return forwardPath;
 	}
 	@PostMapping("/user_login_action")
-	public String user_login_action_post(@ModelAttribute User user,Model model,HttpSession session) throws Exception {
+	public String user_login_action_post(@ModelAttribute("fuser") User user,Model model,HttpSession session) throws Exception {
 		String forwardPath="";
-		int result=userService.login(user.getUserId(), user.getPassword());
-		if(result==0) {
-			model.addAttribute("fuser", user);
-			forwardPath="redirect:user_login_form";
-		}else if(result==1) {
-			model.addAttribute("fuser", user);
-			forwardPath="redirect:user_login_form";
-		}else if(result==2) {
+		try {
+			userService.login(user.getUserId(), user.getPassword());
 			session.setAttribute("sUserId", user.getUserId());
-			forwardPath="redirect:user_view";
+			forwardPath="redirect:user_main";
+		} catch (UserNotFoundException e) {
+			e.printStackTrace();
+			model.addAttribute("msg1",e.getMessage());
+			forwardPath="user_login_form";
+		} catch (PasswordMisMatchException e) {
+			e.printStackTrace();
+			model.addAttribute("msg2",e.getMessage());
+			forwardPath="user_login_form";
 		}
 		return forwardPath;
 	}
+	
+	
 	@RequestMapping("/user_view")
 	public String user_view(HttpSession session) throws Exception {
 		/************** login check **************/
@@ -85,7 +94,7 @@ public class UserController {
 			forwardPath = "user_view";
 		return forwardPath;
 	}
-	@PostMapping("user_remove_action")
+	@PostMapping("/user_remove_action")
 	public String user_remove_action_post(HttpSession session) throws Exception {
 		/************** login check **************/
 		String forwardPath="";
@@ -98,7 +107,7 @@ public class UserController {
 		forwardPath = "redirect:user_main";
 		return forwardPath;
 	}
-	@RequestMapping("user_logout_action")
+	@RequestMapping("/user_logout_action")
 	public String user_logout_action(HttpSession session) {
 		/************** login check **************/
 		String forwardPath="";
@@ -114,15 +123,16 @@ public class UserController {
 	
 	
 	@PostMapping("/user_modify_form")
-	public String user_modify_form_post(HttpSession session) throws Exception {
-		//############# 왜 안되지,,? ##################
+	public String user_modify_form_post(HttpSession session,Model model) throws Exception {
 		/************** login check **************/
 		String forwardPath="";
 		if(session.getAttribute("sUserId")==null){
 			forwardPath="redirect:user_login_form";
 			return forwardPath;
 		}
-		forwardPath = "forward:/WEB-INF/views/user_modify_form.jsp";
+		User loginUser=userService.findUser((String)session.getAttribute("sUserId"));
+		model.addAttribute("loginUser", loginUser);
+		forwardPath = "user_modify_form";
 		return forwardPath;
 	}
 	
@@ -141,16 +151,19 @@ public class UserController {
 
 	
 	
-	
-	
-	
-	
-	
-	
-
-	public String user_action_get() {
-		String forwardPath = "";
+	/***********GET방식요청시 guest_main redirection*********/
+	@GetMapping({
+				"/user_write_action",
+				"/user_login_action",
+				})
+	public String user_get() {
+		String forwardPath = "redirect:user_main";
 		return forwardPath;
+	}
+	/****************Local Exception Handler***********/
+	@ExceptionHandler(Exception.class)
+	public String user_exception_handler(Exception e) {
+		return "user_error";
 	}
 
 

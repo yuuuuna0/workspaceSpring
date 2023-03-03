@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import org.springframework.stereotype.Service;
 
+import com.itwill.user.exception.ExistedUserException;
+import com.itwill.user.exception.PasswordMisMatchException;
+import com.itwill.user.exception.UserNotFoundException;
+
 /*
  * - 회원관리 업무(비즈니스로직,예외처리,트랜젝션,보안,로깅)을 수행하는 클래스
  * - 웹컴포넌트(서블릿,JSP)에서 직접접근(메쏘드호출)하는 클래스(객체)
@@ -29,23 +33,15 @@ public class UserServiceImpl implements UserService{
 	 */
 	/**************1.반환값사용***********************/
 	@Override
-	public int create(User user)throws Exception{
-		/*
-		 * -1:아이디중복
-		 *  1:회원가입성공
-		 */
-		
-		
+	public int create(User user)throws ExistedUserException,Exception{
 		//1.아이디중복체크
 		if(userDao.existedUser(user.getUserId())) {
 			//아이디중복
-			return -1;
-		}else {
-			//아이디안중복
-			//2.회원가입
-			int insertRowCount=userDao.create(user);
-			return insertRowCount;
+			throw new ExistedUserException(user.getUserId()+" 는 이미 존재하는아이디입니다.");
 		}
+		//아이디안중복
+		//2.회원가입
+		return userDao.create(user);
 	}
 	/*********************************************/
 	
@@ -63,20 +59,13 @@ public class UserServiceImpl implements UserService{
 		User user = userDao.findUser(userId);
 		if(user==null) {
 			//아이디존재안함
-			result=0;
-		}else {
-			//아이디존재함
-			if(user.isMatchPassword(password)){
-				System.out.println("out:"+password);
-				System.out.println("int:"+user.getPassword());
-				//패쓰워드일치(로그인성공)
-				result=2;
-			}else {
-				//패쓰워드불일치
-				result=1;
-			}
+			throw new UserNotFoundException(userId+"는 존재하지 않는 아이디입니다.");
 		}
-		
+		if(!user.isMatchPassword(password)){
+			//패쓰워드불일치
+			throw new PasswordMisMatchException("패스워드가 일치하지 않습니다.");
+		}
+		//아이디존재함		
 		return result;
 	}
 	/*
