@@ -1,12 +1,21 @@
 package com.itwill.user.config;
 
+
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 
 @Configuration
+//@PropertySource("jdbc.properties")
 public class ApplicationConfig {
+	@Autowired
+	Environment environment;
+
 	/***************MessageSource객체등록*******************/
 	@Bean("messageSource")
 	public MessageSource messageSource() {
@@ -16,22 +25,20 @@ public class ApplicationConfig {
 		return resourceBundleMessageSource;
 	}
 	
-	
 	/*
 	 application.properties파일의 값얻기위한객체
 	 */
-	/*
-	@Autowired
-	Environment environment;
+	
+	/***************DataSource객체등록*******************/
 	@Bean
-	public DataSource apacheDataSource() {
+	public BasicDataSource apacheDataSource() {
 		BasicDataSource dataSource=new  BasicDataSource();
 		dataSource.setUrl(environment.getProperty("spring.datasource.url"));
 		dataSource.setUsername(environment.getProperty("spring.datasource.username"));
 		dataSource.setPassword(environment.getProperty("spring.datasource.password"));
 		return dataSource;
 	}
-	*/
+	
 	/*
 	@Bean
 	public DataSource apacheDataSource() {
