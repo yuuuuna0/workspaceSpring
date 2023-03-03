@@ -87,9 +87,9 @@ public class GuestController {
 		return forwardPath;
 	}
 	@PostMapping("/guest_modify_action")
-	public String guest_modify_action(@ModelAttribute Guest guest,Model model) throws Exception{
+	public String guest_modify_action(@ModelAttribute Guest guest,RedirectAttributes redirectAttributes) throws Exception{
 		int result=guestService.updateGuest(guest);
-		model.addAttribute("guest", guest);
+		redirectAttributes.addAttribute("guest_no", guest.getGuest_no());
 		String forwardPath = "redirect:guest_view";
 		return forwardPath;
 	}
