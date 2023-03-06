@@ -1,0 +1,8 @@
+server:
+  servlet.context-path: /user_spring_thymeleaf
+  servlet: 
+    encoding: 
+      charset: UTF-8
+      enabled: true
+      force: true
+   
