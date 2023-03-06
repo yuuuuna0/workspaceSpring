@@ -33,7 +33,11 @@ import com.itwill.user.exception.UserNotFoundException;
 public class UserController {
 	@Autowired
 	private UserService userService;
-
+	//아래거 있고 없고 차이 (url에 session 보임) --> 설정에서 session tracing mode를 cookie로 설정
+	@RequestMapping("/")
+	public String user_common() {
+		return "redirect:user_main";
+	}
 	@RequestMapping("/user_main")
 	public String user_main() {
 		return "user_main";
@@ -79,75 +83,88 @@ public class UserController {
 		}
 		return forwardPath;
 	}
-	
-	
 	@RequestMapping("/user_view")
-	public String user_view(HttpSession session) throws Exception {
-		/************** login check **************/
+	//인자를 HttpSession 대신 HttpServletRequest 쓰는 이유 
+	//		-->  session에는 login시 user를 담는 것이지 view를 볼 때 session에 담는게 아니기 때문 
+	//			 & session 인자로 받으면 Model 객체도 받아서 넣어줘야 함.
+	public String user_view(HttpServletRequest request) throws Exception {
 		String forwardPath="";
-		if(session.getAttribute("sUserId")==null){
+		/************** login check **************/
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		if(sUserId==null){
 			forwardPath="redirect:user_login_form";
 			return forwardPath;
 		}
-			User loginUser=userService.findUser((String)session.getAttribute("sUserId"));
-			session.setAttribute("loginUser", loginUser);
-			forwardPath = "user_view";
+		User loginUser=userService.findUser(sUserId);
+		request.setAttribute("loginUser", loginUser);
+		forwardPath = "user_view";
+		return forwardPath;
+	}
+	@PostMapping("/user_modify_form")
+	public String user_modify_form_post(HttpServletRequest request) throws Exception {
+		String forwardPath="";
+		/************** login check **************/
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		if(sUserId==null){
+			forwardPath="redirect:user_login_form";
+			return forwardPath;
+		}
+		User loginUser=userService.findUser(sUserId);
+		request.setAttribute("loginUser", loginUser);
+		forwardPath = "user_modify_form";
+		return forwardPath;
+	}
+	@PostMapping("/user_modify_action")
+	public String user_modify_action_post(@ModelAttribute User user, HttpServletRequest request) throws Exception {
+		String forwardPath="";
+		/************** login check **************/
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		if(sUserId==null){
+			forwardPath="redirect:user_login_form";
+			return forwardPath;
+		}
+		int result=userService.update(user);
+		//업데이트 후 session에 있는 데이터를 쓰기 때문에 해당 메소드의 데이터를 넘기지 않아도 된다.
+		forwardPath = "redirect:user_view";
 		return forwardPath;
 	}
 	@PostMapping("/user_remove_action")
-	public String user_remove_action_post(HttpSession session) throws Exception {
-		/************** login check **************/
+	public String user_remove_action_post(HttpServletRequest request) throws Exception {
 		String forwardPath="";
-		if(session.getAttribute("sUserId")==null){
-			forwardPath="redirect:user_login_form";
+		/************** login check **************/
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		if(sUserId==null){
+			forwardPath="redirect:user_main";
 			return forwardPath;
 		}
-		int result=userService.remove((String)session.getAttribute("sUserId"));
-		session.invalidate();
-		forwardPath = "redirect:user_main";
+		int result=userService.remove(sUserId);
+		request.getSession().invalidate();
+		/*
+		forwardPath = "forward:user_logout_action";	//forward를 반드시 붙여야 한다. 
+													//	--> controller에 맵핑되어있는 다른 url을 요청할 때 붙인다.
+													//	--> controller맵핑을 먼저 찾고 그 다음 jsp를 찾음. (잘 쓰는 방법은 아니다. forwarding을 여러번 하는 건 좋은 방법이 아님)
+		*/
+		forwardPath ="redirect:user_main";
 		return forwardPath;
 	}
 	@RequestMapping("/user_logout_action")
-	public String user_logout_action(HttpSession session) {
-		/************** login check **************/
+	public String user_logout_action(HttpServletRequest request) {
 		String forwardPath="";
-		if(session.getAttribute("sUserId")==null){
-			forwardPath="redirect:user_login_form";
+		/************** login check **************/
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		if(sUserId==null){
+			forwardPath="redirect:user_main";
 			return forwardPath;
 		}
-		session.invalidate();
+		request.getSession().invalidate();
+		//request.getSession(false).invalidate();	--> session이 존재하지 않으면 null을 반환한다?
 		forwardPath="redirect:user_main";
 		return forwardPath;
 	}
 	
 	
 	
-	@PostMapping("/user_modify_form")
-	public String user_modify_form_post(HttpSession session,Model model) throws Exception {
-		/************** login check **************/
-		String forwardPath="";
-		if(session.getAttribute("sUserId")==null){
-			forwardPath="redirect:user_login_form";
-			return forwardPath;
-		}
-		User loginUser=userService.findUser((String)session.getAttribute("sUserId"));
-		model.addAttribute("loginUser", loginUser);
-		forwardPath = "user_modify_form";
-		return forwardPath;
-	}
 	
-	@PostMapping("/user_modify_action")
-	public String user_modify_action_post(@ModelAttribute User user, HttpSession session) throws Exception {
-		/************** login check **************/
-		String forwardPath="";
-		if(session.getAttribute("sUserId")==null){
-			forwardPath="redirect:user_login_form";
-			return forwardPath;
-		}
-		session.setAttribute("loginUser", user);
-		forwardPath = "redirect:user_view";
-		return forwardPath;
-	}
 
 	
 	
@@ -155,11 +172,15 @@ public class UserController {
 	@GetMapping({
 				"/user_write_action",
 				"/user_login_action",
+				"/user_mofidy_form",
+				"/user_modify_action",
+				"/user_remove_action"
 				})
 	public String user_get() {
 		String forwardPath = "redirect:user_main";
 		return forwardPath;
 	}
+	
 	/****************Local Exception Handler***********/
 	@ExceptionHandler(Exception.class)
 	public String user_exception_handler(Exception e) {
