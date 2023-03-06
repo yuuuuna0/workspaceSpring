@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.itwill.user.controller.AuthLoginAnnotationInterceptor;
 import com.itwill.user.controller.AuthLoginInterceptor;
 
 @Configuration
@@ -25,9 +26,18 @@ public class WebConfig implements WebMvcConfigurer{
 		 registry.jsp("/WEB-INF/views/",".jsp");
 	}
 	*/
-	
+	/*
+	 * 인터셉터 등록
+	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		AuthLoginAnnotationInterceptor authLoginAnnotationInterceptor=new AuthLoginAnnotationInterceptor();
+		registry.addInterceptor(authLoginAnnotationInterceptor)
+		.addPathPatterns("/**")	//전체등록
+		.excludePathPatterns("/css/**")
+		.excludePathPatterns("/js/**")
+		.excludePathPatterns("/image/**");
+		/*
 		AuthLoginInterceptor authLoginInterceptor=new AuthLoginInterceptor();
 		registry.addInterceptor(authLoginInterceptor)
 		.addPathPatterns("/**")	//전체등록
@@ -39,6 +49,7 @@ public class WebConfig implements WebMvcConfigurer{
 		.excludePathPatterns("/user_write_action")
 		.excludePathPatterns("/user_login_form")
 		.excludePathPatterns("/user_login_action");
+		*/
 	}
 	
 	/*************************************************************/
