@@ -9,7 +9,7 @@
 	}
 	
 
-②mvc-config.xml에 mvc:interceptor설정
+②mvc-config.xml에 mvc:interceptor설정 -->WebConfig.java에 설정함
 	<mvc:interceptors>
 		    <mvc:interceptor>
 		        <mvc:mapping path="/**"/>  
@@ -24,4 +24,24 @@
 		        <bean class="com.itwill.user.controller.AuthLoginInterceptor" />
 		    </mvc:interceptor>
 	   </mvc:interceptors>
+	   
+③	WebConfig.java 에 인터셉터등록   
+@Configuration
+public class WebConfig implements WebMvcConfigurer{
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		AuthLoginInterceptor authLoginInterceptor=new AuthLoginInterceptor();
+		registry.addInterceptor(authLoginInterceptor)
+		.addPathPatterns("/**")	//전체등록
+		.excludePathPatterns("/css/**")
+		.excludePathPatterns("/js/**")
+		.excludePathPatterns("/image/**")
+		.excludePathPatterns("/user_main")
+		.excludePathPatterns("/user_write_form")
+		.excludePathPatterns("/user_write_action")
+		.excludePathPatterns("/user_login_form")
+		.excludePathPatterns("/user_login_action");
+	}
+}
 	   	
