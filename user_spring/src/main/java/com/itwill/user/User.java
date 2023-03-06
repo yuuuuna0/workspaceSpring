@@ -27,6 +27,9 @@ public class User {
 	private String name;
 	private String email;
 
+	public static User create() {
+		return new User("","","","");
+	}
 	
 	/*
 	 *패쓰워드 일치여부 검사 
