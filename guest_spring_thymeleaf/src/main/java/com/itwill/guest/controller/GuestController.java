@@ -115,6 +115,13 @@ public class GuestController {
 	public String guest_exception_handler(Exception e) {
 		return "guest_error";
 	}
+	
+	@RequestMapping("/thymeleaf_test")
+	public String thymeleaf_test() {
+	String forwardPath = "thymeleaf_test";
+	return forwardPath;
+}
+
 
 }
 
