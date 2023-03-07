@@ -15,33 +15,77 @@
 		  - new Object(),new Array()
 	*/
 	/********************Object[JSON]********************/
-	
+	let studentObject1={
+	    		  id:'aaa',
+	    		  name:'김태희',
+	    		  weight:56.32,
+	    		  married:true,
+	    		  toString:function(){
+	    			return "["+this.id+"]"+this.name+","+this.weight+","+this.married;
+	    		 }
+	      };
 	
 	/***** 멤버(프로퍼티) 동적추가*******/
-	
+	studentObject1.age=34;
+	studentObject1.address='서울';
+	studentObject1.setWeight=function(weight){
+		this.weight=weight;
+	};
 	
 	
 	document.write("-------------studentObject1출력--------------<br>");
-	
+	document.write(studentObject1.id+"<br>");
+	document.write(studentObject1.name+"<br>");
+	document.write(studentObject1.weight+"<br>");
+	document.write(studentObject1.married+"<br>");
+	document.write(studentObject1.toString()+"<br>");
+	document.write(studentObject1.age+"<br>");
+	document.write(studentObject1.address+"<br>");
+	studentObject1.setWeight(56.89);
+	document.write(studentObject1.weight+"<br>");
 	/********************Object[생성자함수]********************/
-	
+	let studentObject2=new Object();
+	studentObject2.id='bbb';
+	studentObject2.name='정지훈';
+	studentObject2.weight=89;
+	studentObject2.married=true;
+	studentObject2.age=38;
+	studentObject2.address='서울';
+	studentObject2.setWeight=function(weight){
+		this.weight=weight
+	};
+	studentObject2.toString=function(){
+		return "["+this.id+"]"+this.name+","+this.weight+","+this.married;
+	}
 	/*******멤버(프로퍼티)동적추가********/
 	
 	
 	
 	document.write("-------------studentObject2출력--------------<br>");
-	
-	/********************Array[JSON]**************************
+	document.write(studentObject2.name+"<br>");
+	document.write(studentObject2.weight+"<br>");
+	document.write(studentObject2.married+"<br>");
+	document.write(studentObject2.toString()+"<br>");
+	document.write(studentObject2.age+"<br>");
+	document.write(studentObject2.address+"<br>");
+	studentObject2.setWeight(100);
+	document.write(studentObject2.weight+"<br>");
+	/********************Array[JSON]**************************/
 	let idArray=['aaa','bbb','ccc'];
 	let nameArray=['kim','lee','park'];
 	let ageArray=[34,23,45];
 	let studentObjectArray=[studentObject1,studentObject2];
-	*******************Array[생성자함수]*******************/
+	//let studentObjectArray=[{},{}];
+	/*******************Array[생성자함수]*******************/
 	
 	document.write('--------------------Array출력----------------------<br>');
-	
+	for(let i=0;i<idArray.length;i++){
+		document.write(idArray[i]+"<br>");
+	}
 	document.write('--------------------Array출력[Object]----------------------<br>');
-	
+	for(let i=0;i<studentObjectArray.length;i++){
+		document.write(studentObjectArray[i].toString()+"<br>");
+	}
 </script>
 </body>
 </html>
