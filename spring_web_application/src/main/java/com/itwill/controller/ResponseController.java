@@ -21,7 +21,7 @@ import com.itwill.view.XMLView;
 public class ResponseController {
 	/*##################forward###########################*/
 	/*
-	 * fowading view객체반환 --> dispatcherServlet으로 반환
+	 * forwarding view객체반환 --> dispatcherServlet으로 반환
 	 */
 	@RequestMapping("/response_forward_view_object")
 	public View response_forward_view_object() {

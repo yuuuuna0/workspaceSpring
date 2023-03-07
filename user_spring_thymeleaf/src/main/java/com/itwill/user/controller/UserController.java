@@ -52,7 +52,7 @@ public class UserController {
 		}catch (ExistedUserException e) {
 			model.addAttribute("msg", e.getMessage());
 			//model.addAttribute("fuser", user);
-			forward_path="user_write_form";
+			forward_path="forward:user_write_form";
 		}
 		return forward_path;
 	}

@@ -89,7 +89,7 @@
 											- 회원 가입</b></td>
 								</tr>
 							</table> <!-- write Form  -->
-							<form name="f" method="post">
+							<form name="f" method="post" th:object="${fuser!=null ? fuser:new com.itwill.user.User()}">
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
@@ -97,14 +97,14 @@
 											아이디</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="userId"
-											value="">&nbsp;&nbsp;<font color="red"></font>
+											value="" th:value="*{userId}" th:text="${msg}">&nbsp;&nbsp;<font color="red"></font>
 										</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="password" style="width: 150px" name="password"
-											value="">
+											value="" th:value="*{password}">
 										</td>
 									</tr>
 									<tr>
@@ -112,14 +112,14 @@
 											확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="password" style="width: 150px" name="password2"
-											value="">
+											value="" th:value="*{password}">
 										</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="name"
-											value="">
+											value="" th:value="*{name}">
 										</td>
 									</tr>
 									<tr>
@@ -127,7 +127,7 @@
 											주소</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="email"
-											value="">
+											value="" th:value="*{email}">
 										</td>
 									</tr>
 								</table>
