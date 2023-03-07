@@ -33,18 +33,54 @@
 	/*
 	A.선언적함수
 	*/
-	
+	function func1(){
+		let localVar='#func1() local변수 값';
+		document.write('func1() 내부에서 실행: localVar='+localVar+'<br>');
+		return;
+	}
+	function func2(msg){
+		document.write('func2(msg) 실행: local변수 msg'+msg+'<br>');
+		return;
+	}
 	
 	/*
 	1.함수를 변수에 대입
 	*/
-	
+	//펑션변수
+	let func3Var=function func3(){
+					document.write("func3() 실행<br>")
+				 }
+	let func4Var=function func4(arg){
+					document.write("func4("+arg+")실행<br>");
+				 }
 	/*
 	2.함수를 인자로 대입
  	*/
- 	
+ 	function arg_func5(){
+		document.write("&nbsp&nbsp&nbsp&nbsp&nbsp arg_func5()실행<br>");
+	}
+	function func5(funcArg){
+		//변수 타입에는 function도 있다.
+		document.write("------------------------ func5(funcArg) -----------------------------<br>");
+		document.write("1. func5 호출시 인자로 받은 funcArg function 실행 <br>");
+		document.write("2. typeof funcArg -->"+typeof funcArg+"<br>");
+		funcArg();
+		document.write("---------------------------------------------------------------------<br>");
+	}
 	/*
-	B. 익명함수
+	B. 익명함수		
+	*/
+	let func6Var=function(){
+					document.write("func6Var변수에 대입된 익명함수 실행<br>");
+				 };
+	let func7Var=function(arg1,arg2){
+					document.write("func7Var변수에 대입된 익명함수["+arg1+","+arg2+"] 실행<br>");
+				 };
+	/*
+	(function(){
+		document.write("익명함수실행<br>");
+	})();
+	//선언과 동시에 호출 가능_기본생성자같이 생성과 동시에 호출 & 외부에서 호출은 불가능
 	*/
 	
 </script>
@@ -53,21 +89,33 @@
 <h1>자바스크립트함수1</h1><hr>
 <script type="text/javascript">
 	/*
-	A.선언적함수호출
+	A.이름이 존재하는 선언적함수호출
 	*/
-	
-	
+	window.func1();
+	window.func2('#인자1');
+	/*
+	Uncaught ReferenceError: documnent is not defined
+	consol.log(localVar);
+	consol.log(msg);
+	*/
 	/*
 	1.변수에대입한 함수를 호출
 	*/
-	
+	func3Var();
+	func4Var("#인자1");
 	/*
 	2.함수호출시[func5] 함수객체[arg_func5]를 인자로 대입
 	*/
+	func5(arg_func5);				//이렇게 호출하지 않는다.
+	func5(function(){
+		document.write("func5에 인자로 대입한 익명함수 실행<br>");
+	});
 	
 	/*
 	B. 익명함수호출
 	*/
+	func6Var();
+	func7Var('#인자1','#인자2');
 	
 </script>
 </body>

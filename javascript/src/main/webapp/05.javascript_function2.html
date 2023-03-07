@@ -11,12 +11,24 @@
     3. function객체를 반환
      */
     /*********인자로 대입할함수(변수)****************/
-   
+    function arg_func1(){
+    	document.write("## arg_fun1()실행<br>");
+    }
+    function arg_func2(){
+    	document.write("## arg_fun2()실행<br>");
+    }
     /****함수(익명함수)를 인자로받아서실행할함수***/
-    
-	//인자로대입된함수를 실행
-	
-    
+    function func3(funcArg){
+    	document.write("## fun3(funcArg)실행<br>");
+    	//인자로 대입된 함수를 실행
+    	funcArg();
+    }
+    function func4(funcArg1,funcArg2){
+    	document.write("## fun4(funcArg1,funcArg4)실행<br>");
+    	//인자로 대입된 함수를 실행
+    	funcArg1();
+    	funcArg2();
+    }
     
     /***********kQuery.js************
     
@@ -31,17 +43,17 @@
 	<<javascript api document>
 	https://www.w3schools.com
 	 */
-	document	.write('---------------1.함수를인자로대입--------------------------------<br>');
-	
+	document.write('---------------1.함수를인자로대입--------------------------------<br>');
+	func3(arg_func1);
 	document.write('---------------2.익명함수대입된 함수형변수 대입------------------<br>');
 	
 	
 	
-	document	.write('---------------3.익명함수대입------------------------------------<br>');
+	document.write('---------------3.익명함수대입------------------------------------<br>');
 	
 	
 
-	document	.write('---------------kQuery에서 제공하는 function사용----------------<br>');
+	document.write('---------------kQuery에서 제공하는 function사용----------------<br>');
 	
 	
     </script>
