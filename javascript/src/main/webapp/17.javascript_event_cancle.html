@@ -5,31 +5,46 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	
-	
-		/*
-		window.onload 이벤트발생시점
-		   - DOM Tree 생성직후 렌더링전에호출
-		 */
-		/*******이벤트등록*********/
+	/*
+	window.onload 이벤트발생시점
+	   - DOM Tree 생성직후 렌더링전에호출
+	 */
+	/*******(load시)이벤트 등록*********/
+	window.addEventListener('load',function(){
 		
-	    	
+	   	document.getElementById('tweet')
+   					.addEventListener('click',function(e){
+   						alert('상세보기');
+   					});
+	   	document.getElementById('imageSpan')
+	   				.addEventListener('click',function(e){
+	   					alert('프로필보기');
+	   					e.stopPropagation();
+	   				});
 		/*
-	    	anchor클릭시
-	    	1.click event발생(o)
-	    	2.href에기술된 url로 page요청(o)
-	    	*/
-	   
-	    	/*
-	    	anchor클릭시
-	    	1.click event발생(o)
-	    	2.href에기술된 url로 page요청취소( X )[e.preventDefault();]
-	    	*/
-	    	
-		  /*
-	    	submit버튼클릭시
-	    	1.submit event발생(o)
-	    	2.action 에기술된 url로 page요청( x )
-	    	*/
+    	anchor클릭시
+    	1.click event발생(o)
+    	2.href에기술된 url로 page요청(o)
+    	*/
+	   document.getElementById('mainp')
+	   				.addEventListener('click',function(){
+	   					alert('main.jsp로 페이지 기반 요청');
+	   				});
+ 	   document.getElementById('maina')
+			.addEventListener('click',function(e){
+		    	/*
+		    	anchor클릭시
+		    	1.click event발생(o)
+		    	2.href에기술된 url로 page요청취소( X )[e.preventDefault();]
+		    	*/
+				alert('main.jsp로 페이지 기반 요청 취소');
+		    	e.preventDefault();
+			});
+	  /*
+    	submit버튼클릭시
+    	1.submit event발생(o)
+    	2.action 에기술된 url로 page요청( x )
+    	*/
 	    
 	
 	    	
@@ -39,6 +54,8 @@
 	document.getElementsByTagName();
 	document.getElementsByName();
 	 */
+		});
+	
 </script>
 </head>
 <body>
@@ -62,10 +79,9 @@
 
 	<h2>디폴트 이벤트 취소[e.preventDefault()](page요청취소)</h2>
 	1.anchor tag:
-	<a id="mainp" href='main.jsp'>메인페이지요청[페이지요청]</a>
-	<br /> 2.anchor tag:
-	<a id="maina" href='main.jsp'>메인페이지요청[AJAX요청]</a>
-	<br />
+	<a id="mainp" href='main.jsp'>메인페이지요청[페이지요청]</a><br /> 
+	2.anchor tag:
+	<a id="maina" href='main.jsp'>메인페이지요청[AJAX요청]</a><br />
 	<br />
 	<form id="f" name="f" action="join.jsp" method="get">
 		아이디:<input type='text' name="id"><br /> form submit button:<input
