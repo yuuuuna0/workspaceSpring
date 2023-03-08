@@ -13,6 +13,62 @@
 	/*
 	JSON
 	*/
+	const studentObject1={
+			id:"xxx",
+			name:"sim",
+			kor:47,
+			eng:89,
+			math:55,
+			tot:0,
+			avg:0.0,
+			calculateTot:function(){
+				this.tot=this.kor+this.eng+this.math;	//JS에서는 같은 영역이라도 this를 생략하면 에러!
+			},
+			calculateAvg:function(){
+				this.avg=this.tot/3;
+			},
+			toString:function(){
+				return "["+this.id+"]"+this.kor+","+this.eng+","+this.math+","+this.tot+","+this.avg;
+			}
+	}
+	const studentObject2={
+			id:"yyy",
+			name:"yim",
+			kor:67,
+			eng:35,
+			math:87,
+			tot:0,
+			avg:0.0,
+			calculateTot:function(){
+				this.tot=this.kor+this.eng+this.math;	//JS에서는 같은 영역이라도 this를 생략하면 에러!
+			},
+			calculateAvg:function(){
+				this.avg=this.tot/3;
+			},
+			toString:function(){
+				return "["+this.id+"]"+this.kor+","+this.eng+","+this.math+","+this.tot+","+this.avg;
+			}
+	}
+	const studentObject3={
+			id:"zzz",
+			name:"zim",
+			kor:68,
+			eng:84,
+			math:95,
+			tot:0,
+			avg:0.0,
+			calculateTot:function(){
+				this.tot=this.kor+this.eng+this.math;	//JS에서는 같은 영역이라도 this를 생략하면 에러!
+			},
+			calculateAvg:function(){
+				this.avg=this.tot/3;
+			},
+			toString:function(){
+				return "["+this.id+"]"+this.kor+","+this.eng+","+this.math+","+this.tot+","+this.avg;
+			}
+	}
+	const studentArray=[studentObject1, studentObject2, studentObject3];
+	
 	
 </script>
 </head>
@@ -20,7 +76,11 @@
 <h1>생성자 함수1</h1><hr>
 <script type="text/javascript">
 	document.write('--------------student 리스트---------------------<br>');
-	
+	for(let i=0;i<studentArray.length;i++){
+		studentArray[i].calculateTot();
+		studentArray[i].calculateAvg();
+		document.write(studentArray[i].toString()+"<br>");
+	}
 </script>
 </body>
 </html>

@@ -10,8 +10,34 @@
 	/*
 	학생객체를 생성해서 반환해주는 <<< 함수 >>> 작성
 	*/
-	
+	var name='김경호';
 	/****************학생객체****************/
+	function createStudent(id,name,kor,eng,math){
+		let studentObject={
+				id:id,
+				name:name,
+				kor:kor,
+				eng:eng,
+				math:math,
+				tot:0,
+				avg:0.0,
+				calculateTot:function(){
+					this.tot=this.kor+this.eng+this.math;	//JS에서는 같은 영역이라도 this를 생략하면 에러!
+				},
+				calculateAvg:function(){
+					this.avg=this.tot/3;
+				},
+				toString:function(){
+					return "["+this.id+"]"+this.kor+","+this.eng+","+this.math+","+this.tot+","+this.avg;
+				}
+		};
+		
+		return studentObject;
+	}
+	const studentObject1=createStudent('xxx','엑스맨',12,23,34);
+	const studentObject2=createStudent('yyy','엑스맨',54,45,78);
+	const studentObject3=createStudent('zzz','엑스맨',78,98,39);
+	const studentArray=[studentObject1,studentObject2,studentObject3];
 	
 </script>
 </head>
@@ -19,7 +45,11 @@
 <h1>생성자 함수2</h1><hr>
 <script type="text/javascript">
 	document.write('--------------student 리스트---------------------<br>');
-	
+	for(let i=0;i<studentArray.length;i++){
+		studentArray[i].calculateTot();
+		studentArray[i].calculateAvg();
+		document.write(studentArray[i].toString()+"<br>");
+	}
 </script>
 </body>
 </html>
