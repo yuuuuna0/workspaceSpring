@@ -21,7 +21,7 @@
 	   					alert('프로필보기');
 	   					e.stopPropagation();
 	   				});
-		/*
+	   	/*
     	anchor클릭시
     	1.click event발생(o)
     	2.href에기술된 url로 page요청(o)
@@ -40,11 +40,18 @@
 				alert('main.jsp로 페이지 기반 요청 취소');
 		    	e.preventDefault();
 			});
-	  /*
+ 	    /*
     	submit버튼클릭시
     	1.submit event발생(o)
     	2.action 에기술된 url로 page요청( x )
     	*/
+    	document.getElementById('f')	
+    				.addEventListener('submit',function(e){		
+    					//e(event)의 e.target='f'(form)이다. button(x)
+    					alert('submit버튼 클릭 시 join.jsp 페이지로 요청 취소');
+    					console.log(e.target);
+    					e.preventDefault();
+    				});
 	    
 	
 	    	
