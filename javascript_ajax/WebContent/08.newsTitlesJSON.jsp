@@ -36,6 +36,7 @@
 		
 	}
 	sb.append("]");
+	
 	sb.append("}");
 %>
 <%=sb.toString()%>

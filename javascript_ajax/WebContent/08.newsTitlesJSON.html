@@ -41,15 +41,15 @@
 	}
 	
 </style>
-
+<script type="text/javascript" src="ajaxRequest.js"></script>
 <script type="text/javascript">
 	
 	function requestNews() {
-	   
+	   ajaxRequest('GET','08.newsTitlesJSON.jsp',null,responseNews);
 	}
 	
-	function responseNews() {
-	    
+	function responseNews(xhr) {
+	    console.log(xhr.responseText);
 	   
 		/*
 		<< 서버로부터받은데이타[JSON] >>
@@ -70,7 +70,21 @@
 					]
 		}
 		*/
+		let responseJsonStr=xhr.responseText;
+		let responseJsonObject=JSON.parse(responseJsonStr);
 		
+		let newsJsonArray=responseJsonObject.data;
+		console.log(newsJsonArray);
+		
+		let htmlTemplate=`<ul>`;
+		for(let i=0;i<newsJsonArray.length;i++){
+			let title=newsJsonArray[i].newsTitle;
+			let company=newsJsonArray[i].company;
+			let date=newsJsonArray[i].date;
+			htmlTemplate+=`<li>${title}[${company}-${date}]</li>`
+		}
+		htmlTemplate+=`</ul>`;
+		document.getElementById('newsDiv').innerHTML=htmlTemplate;
 		/*	
 		<< 보여줘야할데이타[HTML] >>
 		<ul>
@@ -89,9 +103,10 @@
 		
 	}
 	window.onload=function(){
-		
+		setInterval(requestNews,1000);
 	};
 </script>
+
 </head>
 <body>
 <div id="content">
