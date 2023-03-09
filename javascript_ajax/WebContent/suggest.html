@@ -41,7 +41,7 @@
 		let keywordArray=jsonObject.data;
 		let html="";
 		for(let i=0;i<keywordArray.length;i++){
-			html+="<a href=\"javascript:select();\">"+keywordArray[i]+"</a>"
+			html+="<a href=\"javascript:select('"+keywordArray[i]+"');\">"+keywordArray[i]+"</a>"
 		}
 		document.getElementById('suggestList').innerHTML=html;
 		showSuggestDiv(true);
@@ -51,27 +51,24 @@
 			document.getElementById('suggest').style.display='block';
 		} else{
 			document.getElementById('suggest').style.display='none';
-			
 		}
 	}
-	function select(){
-		alert('select()');
+	function select(keyword){
+		//alert('select()'+keyword);
+		document.search.keyword.value=keyword;
 	}
 	
 	window.onload=function(){
-		showSuggetDiv(false);
-		
+		showSuggestDiv(false);
 		document.search.keyword.addEventListener('focusout',function(){
 			//0.2초 후에 showSuggestDiv
 			setTimeout(function(){
 				showSuggestDiv(false);				
 			},200);
 		});
-		
 		document.search.keyword.addEventListener('focusin',function(){
 			sendKeyword();
 		});
-		
 	}
 </script>
 </head>
@@ -80,7 +77,7 @@
 <hr/>
 <form action="server_search.jsp" name="search">
 	<img src="http://sstatic.naver.net/search/2015/h_logo.png" height="12px" align="bottom">
-	<input 	type="text" name="keyword" onkeyup="sendKeyword();" > &nbsp;
+	<input 	type="text" name="keyword" onkeyup="sendKeyword();"> &nbsp;
 	<input type="submit" value="검색">
 	<div id="suggest" class="suggest">
 		<div id="suggestList">
