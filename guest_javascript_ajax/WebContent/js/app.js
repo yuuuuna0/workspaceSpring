@@ -34,14 +34,12 @@ menuGuestHome.addEventListener('click',function(e){
 
 menuGuestList.addEventListener('click',function(e){
 	let jsonResult=Service.guestService('GET',URL.GUEST_LIST_URL,'');
-	console.log(jsonResult);
 	View.render("#guest-list-template",jsonResult,"#content");
 	e.preventDefault();
 });
 menuGuestWriteForm.addEventListener('click',function(e){
 	View.render("#guest-write-form-template",{},"#content");
 	e.preventDefault();
-	
 });
 
 //초기 로딩시에 home anchor click 이벤트를 trigger
@@ -78,9 +76,53 @@ document.addEventListener('click',function(e){
 			alert(jsonResult.msg);
 		}
 	}
-	/****************** guest_write_action *************** */
-	/****************** guest_modify_form *************** */
-	/****************** guest_modify_action *************** */
+	/****************** guest_write_action **************/
+	if(e.target.id=='btn_guest_write_action'){
+		const data=new FormData(document.f);
+		const queryString= new URLSearchParams(data).toString();
+		console.log(queryString);
+		let params=queryString;
+		let jsonResult=Service.guestService('POST',URL.GUEST_WRITE_ACTION_URL,params);
+		 
+		if(jsonResult.code==1){
+			menuGuestList.click();
+		} else{
+			alert(jsonResult.msg);
+		}
+		
+	}
+	
+	/****************** guest_modify_form ****************/
+	if(e.target.id=='btn_guest_modify_form'){
+		let params='guest_no='+e.target.getAttribute("guest_no");
+		let jsonResult=Service.guestService('POST',URL.GUEST_MODIFY_FORM_URL,params);
+		if(jsonResult.code==1){
+			View.render('#guest-modify-form-template',jsonResult,"#content");
+		} else {
+			alert(jsonResult.msg);
+		}
+	}
+	/****************** guest_modify_action ***************/
+	if(e.target.id=='btn_guest_modify_action'){
+		const data = new FormData(document.f);
+		const queryString = new URLSearchParams(data).toString();
+		console.log(queryString);
+		let params=queryString;
+		let jsonResult=Service.guestService('POST',URL.GUEST_MODIFY_ACTION_URL,params);
+		
+		if(jsonResult.code==1){
+			let params='guest_no='+document.f.guest_no.value;
+			let jsonResult=Service.guestService('GET',URL.GUEST_DETAIL_URL,params);
+			View.render('#guest-detail-template',jsonResult,"#content");
+		} else {
+			alert(jsonResult.msg);
+		}
+	}
+	/********************* 페이지 변환 *******************/
+	if(e.target.id=='btn_guest_list'){
+		menuGuestList.click();
+	}
+	
 });
 
 
