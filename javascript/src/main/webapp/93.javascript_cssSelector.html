@@ -39,6 +39,7 @@ div.myClass{
 		/*********(,or)  #content or div**********/
 		let nodeList1=document.querySelectorAll('#content,div');
 		for(let i=0;i<nodeList1.length;i++){
+			
 			nodeList1[i].style.border='1px solid blue';
 		}
 		
@@ -48,9 +49,14 @@ div.myClass{
 			nodeList2[i].style.color='green';
 		}
 		/*********div 엘레멘트중에서 class가 myClass인 모든 엘레멘트*****/
-		
+		let nodeList3=document.querySelectorAll('div.myClass');
+		for(let i=0;i<nodeList3.length;i++){
+			nodeList3[i].style.backgroundColor='yellow';
+		}
 		/*********id가 content인 엘레멘트*****/
-	
+		document.querySelector('#content').style.backgroundColor='red';
+		
+		
 	</script>
 </body>
 </html>
