@@ -40,7 +40,39 @@ td{
 		※ LVHA-순서(:link — :visited — :hover — :active)
 
 */
-
+	a{
+		text-decoration: none;
+		cursor: pointer;
+	}
+	a:link{
+		color:gray;
+	}
+	a:visited{
+		color:maroon;
+	}
+	a:hover{
+		color:pink;
+		background:cyan;
+		cursor:progress;
+	}
+	a:active{
+		background:white;
+		font-size: 30px;
+	}
+	h2::first-letter{
+		font-size: 50pt;
+		color:red;
+	}
+	tr:first-child{
+		background: greenyellow;
+	}
+	td:first-child{
+		background: pink;
+	}
+	tr:last-child{
+		font-size: 3pt;
+		color:blue;
+	}
 
 </style>
 
