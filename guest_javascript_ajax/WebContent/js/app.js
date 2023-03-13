@@ -42,11 +42,12 @@ menuGuestWriteForm.addEventListener('click',function(e){
 	e.preventDefault();
 });
 
-//초기 로딩시에 home anchor click 이벤트를 trigger
-//menuGuestHome.click();
+
+menuGuestHome.click();		//초기 로딩시에 home anchor click 이벤트를 trigger
+
+
 document.addEventListener('click',function(e){
 	/************* Element 속성 ********** */
-	
 	console.log("event객체: "+e);
 	console.log("event target객체: "+e.target);
 	console.log("event target객체 id: "+e.target.id);
@@ -78,13 +79,38 @@ document.addEventListener('click',function(e){
 	}
 	/****************** guest_write_action **************/
 	if(e.target.id=='btn_guest_write_action'){
-		const data=new FormData(document.f);
-		const queryString= new URLSearchParams(data).toString();
-		console.log(queryString);
-		let params=queryString;
-		let jsonResult=Service.guestService('POST',URL.GUEST_WRITE_ACTION_URL,params);
-		 
+		if (document.f.guest_name.value == "") {
+		alert("이름을 입력하십시요.");
+		document.f.guest_name.focus();
+		return false;
+	}
+	if (document.f.guest_email.value == "") {
+		alert("이메일을 입력하십시요.");
+		document.f.guest_email.focus();
+		return false;
+	}
+	if (document.f.guest_homepage.value == "") {
+		alert("홈페이지를 입력하십시요.");
+		document.f.guest_homepage.focus();
+		return false;
+	}
+
+	if (document.f.guest_title.value == "") {
+		alert("제목을 입력하십시요.");
+		document.f.guest_title.focus();
+		return false;
+	}
+	if (document.f.guest_content.value == "") {
+		alert("내용을 입력하십시요.");
+		document.f.guest_content.focus();
+		return false;
+	}
+		const f=document.querySelector('#guest_write_form');
+		const data=new FormData(f);
+		const params=new URLSearchParams(data).toString();		//params는 변경되지 않으니까 const 타입으로 해주는게 좋음
+		const jsonResult=Service.guestService('POST',URL.GUEST_WRITE_ACTION_URL,params);
 		if(jsonResult.code==1){
+			//view로 가려면 guest_no가 있어야 하는데 write_form에 안 들어있음,,,
 			menuGuestList.click();
 		} else{
 			alert(jsonResult.msg);
@@ -94,7 +120,7 @@ document.addEventListener('click',function(e){
 	
 	/****************** guest_modify_form ****************/
 	if(e.target.id=='btn_guest_modify_form'){
-		let params='guest_no='+e.target.getAttribute("guest_no");
+		const params='guest_no='+e.target.getAttribute("guest_no");
 		let jsonResult=Service.guestService('POST',URL.GUEST_MODIFY_FORM_URL,params);
 		if(jsonResult.code==1){
 			View.render('#guest-modify-form-template',jsonResult,"#content");
@@ -104,15 +130,39 @@ document.addEventListener('click',function(e){
 	}
 	/****************** guest_modify_action ***************/
 	if(e.target.id=='btn_guest_modify_action'){
-		const data = new FormData(document.f);
-		const queryString = new URLSearchParams(data).toString();
-		console.log(queryString);
-		let params=queryString;
-		let jsonResult=Service.guestService('POST',URL.GUEST_MODIFY_ACTION_URL,params);
-		
+		if (document.f.guest_name.value == "") {
+		alert("이름을 입력하십시요.");
+		document.f.guest_name.focus();
+		return false;
+	}
+	if (document.f.guest_email.value == "") {
+		alert("이메일을 입력하십시요.");
+		document.f.guest_email.focus();
+		return false;
+	}
+	if (document.f.guest_homepage.value == "") {
+		alert("홈페이지를 입력하십시요.");
+		document.f.guest_homepage.focus();
+		return false;
+	}
+
+	if (document.f.guest_title.value == "") {
+		alert("제목을 입력하십시요.");
+		document.f.guest_title.focus();
+		return false;
+	}
+	if (document.f.guest_content.value == "") {
+		alert("내용을 입력하십시요.");
+		document.f.guest_content.focus();
+		return false;
+	}
+		const f=document.querySelector('#guest_modify_form');
+		const data=new FormData(f);
+		const params=new URLSearchParams(data).toString();		//params는 변경되지 않으니까 const 타입으로 해주는게 좋음
+		const jsonResult=Service.guestService('POST',URL.GUEST_MODIFY_ACTION_URL,params);
 		if(jsonResult.code==1){
-			let params='guest_no='+document.f.guest_no.value;
-			let jsonResult=Service.guestService('GET',URL.GUEST_DETAIL_URL,params);
+			const param='guest_no='+f.guest_no.value;
+			const jsonResult=Service.guestService('GET',URL.GUEST_DETAIL_URL,param);
 			View.render('#guest-detail-template',jsonResult,"#content");
 		} else {
 			alert(jsonResult.msg);
@@ -122,13 +172,7 @@ document.addEventListener('click',function(e){
 	if(e.target.id=='btn_guest_list'){
 		menuGuestList.click();
 	}
-	
+	if(e.target.id=='btn_guest_write_form'){
+		menuGuestWriteForm.click();
+	}
 });
-
-
-
-
-
-
-
-

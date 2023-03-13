@@ -4,6 +4,8 @@
 // import {ajaxRequest} from './request.js';
  function guestService(method,url,params){
 	//ajax요청
+	
+	//new Promise();
 	let returnJsonResult={};
 	ajaxRequest(method,
 				url,
