@@ -22,7 +22,7 @@
 	 이함수의 인자는 
 	 	문자열(표준객체(document),function)이며 
 	 	CSS선택자표현을 포함할수있다.
-	 	<<< jQuery factory functin에 들어갈수있는인자>>>
+	 	<<< jQuery factory function에 들어갈수있는인자>>>
 	 		1 . $('#id')   		:css selector문자열
 	 		2 . $(document)		:표준객체
 	 		3 . $(function(){})	:함수
@@ -33,13 +33,30 @@
 	 jQueryWrapper 객체는 여러개의 DOM요소를 캡슐화 할수있으며 
 	 이것을 다양한방식으로다룰수 있게해준다.
 	 */
-	
+	 
+	 console.log("1. "+$);
+	 console.log("2. "+window.jQuery);
+	 
 	 $(function(){
-		   /*
+		  /*
 			DOM tree loading후 렌더링전에 호출
-			*/
-		
-		
+		  */
+		  let jQueryWrapper1=$('h1');
+		  let jQueryWrapper2=$('h2');
+		  console.log("3. jQueryWrapperObject1"+jQueryWrapper1);
+		  console.log("4. jQueryWrapperObject2"+jQueryWrapper2);
+		  jQueryWrapper1.css('color','pink');
+		  jQueryWrapper2.css('color','purple');
+		  
+		  $('h3').text('졸려쥬글거가타용').css('color','white').css('background','green');
+		  $('h4').text('factory function은 jQueryObject를 반환합니다.');
+		  $('h5').text('월요일이네요~');
+		  $('h6').text('개졸리용');
+		  
+		  console.log("$('h1').text() ==> "+$('h1').text());
+		  console.log("$('h2').text() ==> "+$('h2').text());
+		  
+		  //제이쿼리에서는 set get 자동으로 함
 	 });
 	 
 	 window.onload=function(){

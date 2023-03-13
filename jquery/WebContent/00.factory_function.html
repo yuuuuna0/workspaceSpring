@@ -15,12 +15,48 @@
 		    div element jQuery wrapper객체생성
 	*/
 	
+	console.log("1. "+window.jQuery);
+	console.log("2. "+window.$);
+	
 	$(function(){
-	    console.log('------DOM tree로딩직후 호출되는코드------');	
+	    console.log('------DOM tree로딩직후 호출되는코드[jQuery,$]------');
+	    let jQueryWrapperObject1=jQuery('h1');
+		let jQueryWrapperObject2=$('h2');
+		
+		console.log("3. factory function return: "+jQueryWrapperObject1);
+		console.log("4. factory function return: "+jQueryWrapperObject2);
+		
+		jQueryWrapperObject1.css('color','blue');
+		jQueryWrapperObject2.css('background','gold');
+		jQueryWrapperObject1.text('오늘은 jquery를 공부합니다.');
+		jQueryWrapperObject2.text('factory function은 중요한 내용입니다');
+		
+		$('h3').css('background','pink').text('jquery chaining coding');
+		$('h4').text('끝내줘라').css('color','red').css('border','5px dotted yellow');
+		$('h5').css('color','green').text('오늘은 월요일입니다.');
+		$('h6').css('color','red').css('background','silver');
+	    
 	});
 	
 	window.onload=function(){
-		console.log('------DOM tree로딩직후 호출되는코드------');	
+		console.log('------DOM tree로딩직후 호출되는코드[window,onload]------');
+		/*
+		let jQueryWrapperObject1=jQuery('h1');
+		let jQueryWrapperObject2=$('h2');
+		
+		console.log("3. factory function return: "+jQueryWrapperObject1);
+		console.log("4. factory function return: "+jQueryWrapperObject2);
+		
+		jQueryWrapperObject1.css('color','blue');
+		jQueryWrapperObject2.css('background','gold');
+		jQueryWrapperObject1.text('오늘은 jquery를 공부합니다.');
+		jQueryWrapperObject2.text('factory function은 중요한 내용입니다');
+		
+		$('h3').css('background','pink').text('jquery chaining coding');
+		$('h4').text('끝내줘라').css('color','red').css('border','5px dotted yellow');
+		$('h5').css('color','green').text('오늘은 월요일입니다.');
+		$('h6').css('color','red').css('background','silver');
+		*/
 	};
 	
 </script>
