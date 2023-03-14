@@ -8,51 +8,77 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.ajax.domain.News;
 
-
+@RestController
 public class JavaScriptAjaxRestController {
 	/*
-	 * << @ResponseBody >> - ViewResolver-->View-->foward jsp 를 사용하지않는다 -
-	 * MessageConverter(text,xml,json)가 클라이언트로 응답한다. - @RestController 어노테이션을 사용하면
-	 * 생략가능하다.
+	 * << @ResponseBody >> - ViewResolver-->View-->foward jsp 를 사용하지않는다 
+	 * - MessageConverter(text,xml,json)가 클라이언트로 응답한다. 
+	 * - @RestController 어노테이션을 사용하면 생략가능하다.
 	 */
-
-	public String ajaxRequest() throws Exception {
-		
-		return "";
+	@GetMapping(value="/02.ajaxRequest")
+	public String ajaxRequest(@RequestParam(name="id",defaultValue="") String id) throws Exception {
+		String msg="";
+		if(id.startsWith("guard")){
+			msg="사용가능";
+		}else{
+			msg="사용불가능";
+		}
+		return msg;
 	}
 
-	
-	public String ajaxRequestGETPOST() throws Exception {
-		return "";
+	@PostMapping(value="/03.ajaxRequestGETPOST")
+	public String ajaxRequestGETPOST(@RequestParam(name="id",defaultValue="") String id) throws Exception {
+		String msg="";
+		if(id.startsWith("guard")){
+			msg="사용가능";
+		}else{
+			msg="사용불가능";
+		}
+		Thread.sleep(1000);
+		return msg;
 	}
 
-	
+	@GetMapping(value="04.server_clock")
 	public String server_clock() {
 		return new Date().toLocaleString();
 	}
 
-	
+	@GetMapping(value="05.newsTitlesHTML")
 	public String newsTitlesHTML() {
-		return "";
+		List<News> newsList= this.getNewsList();
+		StringBuffer sb=new StringBuffer();
+		sb.append("<ul>");
+		int count=(int)(Math.random()*newsList.size())+1;
+		for(int i=0;i<count;i++){
+			News news=newsList.get(i);
+			sb.append("<li>"+news.getTitle()+"["+news.getCompany()+"-"+news.getDate()+"][HTML]</li>");
+		}
+		sb.append("</ul>");
+		return sb.toString();
 	}
 
-	
+	@GetMapping(value="08.newsTitlesJSON")
 	public Map<String, Object> newsTitlesJSON() {
-		
-		return null;
+		Map<String, Object> resultMap=new HashMap<String,Object>();
+		resultMap.put("code", 1);
+		resultMap.put("data", this.getNewsList());
+		return resultMap;
 	}
 
-	
+	@GetMapping(value="suggest",produces="application/json;charset=UTF-8")
 	public Map<String,Object> suggest(@RequestParam(value = "keyword",defaultValue = "") String keyword ) {
-		
-		return null;
+		Map<String, Object> resultMap=new HashMap<String, Object>();
+		List keywordList=this.search(keyword);
+		resultMap.put("count",keywordList.size());
+		resultMap.put("data", keywordList);
+		return resultMap;
 	}
 
 	public List<News> getNewsList() {

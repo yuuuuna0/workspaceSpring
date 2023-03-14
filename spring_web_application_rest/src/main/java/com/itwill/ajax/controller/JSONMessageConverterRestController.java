@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.ajax.domain.News;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 public class JSONMessageConverterRestController {
 
@@ -30,6 +32,7 @@ public class JSONMessageConverterRestController {
 	 * }
 	 * 
 	 */
+	@ApiOperation(value="뉴스리스트")
 	@GetMapping(value="/news", produces="application/json;charset=UTF-8")
 	public List<News> newsTitlesListJson() {
 		return this.getNewsList();
