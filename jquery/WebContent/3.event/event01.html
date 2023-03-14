@@ -40,12 +40,16 @@ td {
 			});
 		}
 		*/
-		
-		
-		
-		
-		
-		
+		$('td').click(function(e){
+			console.log("event[표준객체]:"+e);
+			console.log("e.target[표준객체]:"+e.target);
+			console.log(e.target.firstChild.nodeValue);
+			console.log("this   :"+this);		//event function 안의 this 객체는 target 객체이다.
+			console.log(this.firstChild.nodeValue);
+			console.log($(this).text());
+			console.log($(e.target).text());
+		});
+
 		
 	});
 </script>

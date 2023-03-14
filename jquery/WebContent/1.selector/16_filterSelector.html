@@ -63,6 +63,7 @@ td{
 		font-size: 50pt;
 		color:red;
 	}
+	
 	tr:first-child{
 		background: greenyellow;
 	}
@@ -73,14 +74,21 @@ td{
 		font-size: 3pt;
 		color:blue;
 	}
+	
 
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
-		
+		$('tr').css('background','white');
+		$('tr:eq(0)').css('background','greenyellow');
+		$('td:eq(39)').css('background','pink');
+		$('tr:eq(0) > td:eq(9)').css('background','orange');
+		$('tr:eq(2) > td:odd').css('background','gold');
+		$('tr:eq(2) > td:even').css('background','blue');
+		$('tr:eq(3) > td:first').css('background','silver');
+		$('tr:eq(3) > td:last').css('background','beige');
 		
 		
 	});

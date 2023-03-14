@@ -17,6 +17,12 @@ table {
 td {
 	border: 1px solid #AAA;
 }
+td.notSelect{
+	border:0.5px dashed blue;
+}
+td:not(.notSelect){
+	background:pink;
+}
 
 
 
@@ -24,8 +30,8 @@ td {
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
-		
+		$('tr > td.notSelect').css('border','1px double red');
+		$('td:not(.notSelect)').css('background','gold');
 	});
 </script>
 </head>

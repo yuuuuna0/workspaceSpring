@@ -1,6 +1,6 @@
 window.jQuery=function(arg){
 	if(typeof arg=='string'){
-		let elementNodeList=document.querySelectorAll(arg);
+		let elementNodeList=document.querySelectorAll(arg);	//elementNodeList는 jQueryObject로 구성
 		if(!elementNodeList) elementNodeList=[];
 		let jqeuryWrapperObject={
 			'elementNodeList':elementNodeList,
